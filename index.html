@@ -1,0 +1,1856 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>万圣节魔法屋：六把钥匙大逃脱</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   万圣节魔法屋：六把钥匙大逃脱 —— 样式
+   ============================================================ */
+:root{
+  --purple-950:#0f0620; --purple-900:#170a2c; --purple-800:#24113f; --purple-700:#35195c; --purple-600:#4b2a7a; --purple-500:#6b3fb0; --purple-300:#b996f0;
+  --orange:#ff8c1a; --orange-2:#ffb347; --orange-deep:#e2611b;
+  --gold:#ffd45c; --gold-2:#ffe9a3;
+  --night:#0e1a46; --night-2:#1b2a7a;
+  --ink:#fff7ea; --ink-dim:#d9cbef; --ink-faint:#a996c9;
+  --green:#5fe0a0; --red:#ff7a8a;
+  --glass:rgba(42,20,74,.62); --glass-line:rgba(255,255,255,.18);
+  --title:"ZCOOL KuaiLe","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  --body:"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans SC","Source Han Sans SC",system-ui,sans-serif;
+  --top:68px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;overflow:hidden;background:var(--purple-950);color:var(--ink);font-family:var(--body);-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent}
+button{font-family:inherit;cursor:pointer;color:inherit}
+.hidden{display:none!important}
+.glass{background:var(--glass);border:1px solid var(--glass-line);-webkit-backdrop-filter:blur(16px) saturate(140%);backdrop-filter:blur(16px) saturate(140%);box-shadow:0 18px 50px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.12)}
+.py{font-family:"Helvetica Neue",Arial,"PingFang SC",sans-serif;letter-spacing:.5px}
+
+/* ---------- 按钮 ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:none;border-radius:999px;padding:14px 30px;font-size:18px;font-weight:700;color:#3a1600;
+  background:linear-gradient(180deg,#ffd27a 0%,var(--orange) 55%,var(--orange-deep) 100%);
+  box-shadow:0 6px 0 #a8420f,0 12px 26px rgba(255,120,20,.45),inset 0 2px 0 rgba(255,255,255,.55);
+  transition:transform .15s,box-shadow .15s,filter .15s;position:relative;white-space:nowrap}
+.btn:hover{transform:translateY(-2px) scale(1.03);filter:brightness(1.08);box-shadow:0 8px 0 #a8420f,0 16px 34px rgba(255,140,30,.6),inset 0 2px 0 rgba(255,255,255,.55)}
+.btn:active{transform:translateY(4px) scale(.98);box-shadow:0 2px 0 #a8420f,0 6px 14px rgba(255,120,20,.4)}
+.btn.purple{color:#fff;background:linear-gradient(180deg,#9b6ae0,var(--purple-500) 55%,#4b2a7a);box-shadow:0 6px 0 #2d1450,0 12px 26px rgba(107,63,176,.5),inset 0 2px 0 rgba(255,255,255,.35)}
+.btn.purple:hover{box-shadow:0 8px 0 #2d1450,0 16px 34px rgba(150,100,230,.6),inset 0 2px 0 rgba(255,255,255,.35)}
+.btn.purple:active{box-shadow:0 2px 0 #2d1450}
+.btn.small{font-size:14px;padding:9px 18px;box-shadow:0 4px 0 #a8420f,0 8px 16px rgba(255,120,20,.35),inset 0 2px 0 rgba(255,255,255,.5)}
+.btn.small.purple{box-shadow:0 4px 0 #2d1450,0 8px 16px rgba(107,63,176,.4),inset 0 2px 0 rgba(255,255,255,.3)}
+.btn.huge{font-size:clamp(20px,2.6vw,30px);padding:20px 46px}
+.btn:disabled{filter:grayscale(.7) brightness(.7);cursor:not-allowed;transform:none}
+.icon-btn{border:1px solid var(--glass-line);background:rgba(255,255,255,.08);border-radius:12px;height:38px;min-width:38px;padding:0 10px;font-size:15px;transition:.15s}
+.icon-btn:hover{background:rgba(255,255,255,.18);transform:translateY(-1px)}
+.icon-btn:active{transform:scale(.95)}
+.speak{border:none;background:linear-gradient(180deg,#ffe9a3,var(--gold));color:#4a2a00;border-radius:999px;width:40px;height:40px;font-size:18px;box-shadow:0 3px 0 #b8860b;transition:.15s;flex:none}
+.speak:hover{transform:scale(1.1) rotate(-6deg)}
+.speak:active{transform:scale(.95);box-shadow:0 1px 0 #b8860b}
+
+/* ---------- 顶部栏 ---------- */
+#topbar{position:fixed;top:0;left:0;right:0;z-index:40;display:flex;align-items:center;gap:12px 16px;flex-wrap:wrap;padding:10px 16px;
+  background:linear-gradient(180deg,rgba(23,10,44,.92),rgba(23,10,44,.72));border-bottom:1px solid var(--glass-line);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+.tb-brand{font-family:var(--title);font-size:22px;color:var(--gold);text-shadow:0 0 14px rgba(255,170,40,.55);white-space:nowrap}
+.tb-stats{display:flex;gap:8px;flex-wrap:wrap}
+.stat{padding:6px 12px;border-radius:999px;background:rgba(0,0,0,.28);border:1px solid var(--glass-line);font-size:14px;white-space:nowrap}
+.stat b{color:var(--gold);font-size:17px;display:inline-block;min-width:1.2em;text-align:center}
+.stat b.bump{animation:bump .6s}
+.stat.stage{background:rgba(255,140,26,.18);border-color:rgba(255,140,26,.5);color:var(--gold-2)}
+.pw{display:flex;gap:5px;margin-left:auto}
+.pw-slot{width:34px;height:42px;border-radius:9px;background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.16);display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1}
+.pw-slot small{font-size:11px;opacity:.75}
+.pw-slot b{font-size:18px;color:var(--ink-faint)}
+.pw-slot.got{background:linear-gradient(180deg,var(--gold-2),var(--orange));border-color:#fff1c0;box-shadow:0 0 14px rgba(255,190,60,.7)}
+.pw-slot.got b{color:#4a1d00}
+.pw-slot.pop{animation:pop .6s}
+.tb-actions{display:flex;gap:6px}
+@keyframes bump{0%{transform:scale(1)}40%{transform:scale(1.6);color:#fff}100%{transform:scale(1)}}
+@keyframes pop{0%{transform:scale(.3)}60%{transform:scale(1.25)}100%{transform:scale(1)}}
+
+/* ---------- 场景 ---------- */
+.scene{position:fixed;inset:0;display:none;overflow:hidden}
+.scene.active{display:block}
+.scene .content{position:absolute;top:var(--top);left:0;right:0;bottom:0}
+#fxBack{position:fixed;inset:0;z-index:2;pointer-events:none}
+#fxFront{position:fixed;inset:0;z-index:90;pointer-events:none}
+#warp{position:fixed;inset:0;z-index:85;pointer-events:none;opacity:0;transition:opacity .45s;
+  background:radial-gradient(circle at 50% 50%,rgba(255,236,170,.95) 0%,rgba(190,120,255,.92) 22%,rgba(60,20,110,.97) 50%,#0f0620 80%)}
+#warp.on{opacity:1;pointer-events:all}
+#warp::after{content:"✦";position:absolute;left:50%;top:50%;font-size:120px;color:#fff;transform:translate(-50%,-50%);animation:spin 1.2s linear infinite;text-shadow:0 0 40px #fff}
+
+/* ---------- 开始界面 ---------- */
+#sc-start{background:linear-gradient(180deg,#0a1240 0%,#1d2280 35%,#4a2a8a 70%,#2a0f45 100%)}
+.start-moon{position:absolute;right:12%;top:8%;width:clamp(110px,16vw,220px);aspect-ratio:1;border-radius:50%;
+  background:radial-gradient(circle at 38% 38%,#fffdf0,#fff3c4 55%,#f2d98a);box-shadow:0 0 60px 20px rgba(255,240,180,.45),0 0 160px 60px rgba(255,230,160,.18)}
+.start-moon::after{content:"";position:absolute;width:22%;height:22%;border-radius:50%;left:56%;top:30%;background:rgba(220,190,110,.35);box-shadow:-40px 30px 0 -6px rgba(220,190,110,.3)}
+.stars{position:absolute;inset:0;pointer-events:none}
+.stars i{position:absolute;width:3px;height:3px;border-radius:50%;background:#fff;animation:twinkle 3s ease-in-out infinite}
+@keyframes twinkle{0%,100%{opacity:.2;transform:scale(.7)}50%{opacity:1;transform:scale(1.2)}}
+.castle{position:absolute;left:0;right:0;bottom:0;width:100%;height:auto;max-height:58vh}
+.start-ui{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;text-align:center;z-index:3}
+.game-title{font-family:var(--title);font-weight:400;font-size:clamp(46px,8.5vw,108px);line-height:1.05;color:#ffb347;
+  background:linear-gradient(180deg,#fff2b0,#ffb347 45%,#ff7a1a);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  filter:drop-shadow(0 4px 0 #6a2a00) drop-shadow(0 0 26px rgba(255,140,30,.6));animation:titleFloat 4s ease-in-out infinite}
+.game-title .emo{-webkit-text-fill-color:initial}
+.game-sub{font-size:clamp(17px,2.2vw,26px);margin:18px 0 36px;color:#fff;text-shadow:0 2px 10px rgba(0,0,0,.6);letter-spacing:2px}
+.game-sub2{margin-top:-24px;margin-bottom:30px;color:var(--ink-dim);font-size:14px}
+@keyframes titleFloat{0%,100%{transform:translateY(0) rotate(-1deg)}50%{transform:translateY(-10px) rotate(1deg)}}
+.story{width:min(640px,100%);border-radius:28px;padding:34px 34px 30px;display:flex;flex-direction:column;align-items:center;gap:18px;animation:rise .6s cubic-bezier(.2,.9,.3,1.2)}
+.story .ghost-mini{width:110px;animation:float 3s ease-in-out infinite}
+.story p{font-size:clamp(16px,1.9vw,20px);line-height:2;color:#fff}
+.story p b{color:var(--gold)}
+.flyer{position:absolute;pointer-events:none;z-index:2}
+.flyer.bat1{width:90px;top:22%;animation:batFly 14s linear infinite}
+.flyer.bat2{width:60px;top:12%;animation:batFly 19s linear infinite 4s;left:-10%}
+.flyer.bat3{width:70px;top:34%;animation:batFly 23s linear infinite 9s;left:-10%}
+.flyer.gh1{width:100px;left:8%;top:40%;animation:ghostDrift 7s ease-in-out infinite;opacity:.85}
+.flyer.gh2{width:80px;right:6%;top:52%;animation:ghostDrift 9s ease-in-out infinite 2s;opacity:.8}
+@keyframes batFly{0%{left:-12%;transform:translateY(0)}25%{transform:translateY(-40px)}50%{transform:translateY(20px)}75%{transform:translateY(-30px)}100%{left:110%;transform:translateY(0)}}
+@keyframes ghostDrift{0%,100%{transform:translate(0,0) rotate(-4deg)}50%{transform:translate(20px,-30px) rotate(4deg)}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes rise{from{opacity:0;transform:translateY(30px) scale(.94)}to{opacity:1;transform:none}}
+@keyframes spin{to{transform:translate(-50%,-50%) rotate(360deg)}}
+
+/* ---------- 第一关：房间 ---------- */
+#sc-room{background:radial-gradient(ellipse at 50% 30%,#2b1650,#0f0620 75%)}
+.room-layout{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:10px}
+.room{position:relative;aspect-ratio:16/9;width:min(100%,calc((100dvh - var(--top) - 96px) * 16 / 9));border-radius:18px;overflow:hidden;
+  box-shadow:0 0 0 2px rgba(255,212,92,.25),0 30px 80px rgba(0,0,0,.7)}
+.room-bg{position:absolute;inset:0;width:100%;height:100%}
+.room-bg .flame{transform-box:fill-box;transform-origin:50% 100%;animation:flicker .18s ease-in-out infinite alternate}
+.room-bg .glowpulse{animation:glowPulse 2.4s ease-in-out infinite}
+@keyframes flicker{from{transform:scale(1,1) skewX(-2deg)}to{transform:scale(.92,1.1) skewX(3deg)}}
+@keyframes glowPulse{0%,100%{opacity:.75}50%{opacity:1}}
+.obj{position:absolute;border:0;background:none;padding:0;z-index:3;filter:drop-shadow(0 6px 8px rgba(0,0,0,.55));transition:filter .3s}
+.obj .art{width:100%;transition:transform .3s}
+.obj .art svg{display:block;width:100%;height:auto;overflow:visible}
+.obj:hover,.obj:focus-visible{outline:none;filter:drop-shadow(0 0 10px rgba(255,212,92,1)) drop-shadow(0 0 22px rgba(255,140,26,.8))}
+.obj:hover .art{animation:wobble .7s ease-in-out;transform:scale(1.08)}
+.obj .mark{position:absolute;right:-6%;top:-4%;width:clamp(18px,1.9vw,26px);aspect-ratio:1;border-radius:50%;display:grid;place-items:center;
+  background:radial-gradient(circle at 35% 35%,#fff6c8,var(--gold) 60%,#e0a020);color:#5a2a00;font-weight:900;font-size:clamp(11px,1.2vw,15px);
+  box-shadow:0 0 12px rgba(255,212,92,.9);animation:markPulse 1.6s ease-in-out infinite}
+.obj.solved .mark{background:radial-gradient(circle at 35% 35%,#d6ffe8,var(--green) 60%,#2aa36a);color:#06341c;animation:none;box-shadow:0 0 10px rgba(95,224,160,.8)}
+.obj .tag{position:absolute;left:50%;top:100%;transform:translate(-50%,4px);white-space:nowrap;padding:3px 10px;border-radius:999px;
+  background:rgba(20,8,40,.78);border:1px solid rgba(255,212,92,.45);font-size:clamp(10px,1.05vw,14px);color:#fff;pointer-events:none;opacity:.92}
+.obj .tag small{color:var(--gold);margin-left:4px}
+@keyframes wobble{0%,100%{rotate:0deg}25%{rotate:-7deg}60%{rotate:6deg}85%{rotate:-2deg}}
+@keyframes markPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.2)}}
+.obj-ghost .art{animation:float 3.2s ease-in-out infinite}
+.obj-bat .art{animation:float 2.6s ease-in-out infinite}
+.obj-bat .wing{transform-box:fill-box;animation:flapL .35s ease-in-out infinite alternate}
+.obj-bat .wing-l{transform-origin:100% 40%}
+.obj-bat .wing-r{transform-origin:0% 40%;animation-name:flapR}
+@keyframes flapL{from{transform:rotate(14deg) scaleY(1)}to{transform:rotate(-18deg) scaleY(.8)}}
+@keyframes flapR{from{transform:rotate(-14deg) scaleY(1)}to{transform:rotate(18deg) scaleY(.8)}}
+.flame{transform-box:fill-box;transform-origin:50% 100%;animation:flicker .2s ease-in-out infinite alternate}
+.obj-bat.solved{left:11.5%!important;top:14%!important;width:5.5%!important}
+.obj-bat{transition:left 2.2s cubic-bezier(.5,0,.3,1),top 2.2s cubic-bezier(.5,.4,.3,1),width 2.2s,filter .3s}
+.obj-pumpkin.solved .art{filter:drop-shadow(0 0 14px #ffd45c) drop-shadow(0 0 30px #ffb347);animation:goldPulse 2s ease-in-out infinite}
+@keyframes goldPulse{0%,100%{filter:drop-shadow(0 0 10px #ffd45c) drop-shadow(0 0 20px #ffb347)}50%{filter:drop-shadow(0 0 20px #fff2a0) drop-shadow(0 0 40px #ffb347)}}
+.obj-witch.solved .wand-arm,.celebrate .wand-arm{transform-box:fill-box;transform-origin:0% 100%;animation:wave 1s ease-in-out infinite}
+.celebrate .wand-arm{animation-duration:.4s}
+@keyframes wave{0%,100%{transform:rotate(0)}50%{transform:rotate(-28deg)}}
+.obj-ghost.solved .art{animation:float 2.4s ease-in-out infinite}
+.obj-ghost.spin-once .art svg{animation:ghostSpin 1.4s ease-in-out}
+@keyframes ghostSpin{0%{transform:rotateY(0) scale(1)}50%{transform:rotateY(360deg) scale(1.25)}100%{transform:rotateY(720deg) scale(1)}}
+.obj-broom.away{opacity:0}
+.broom-flyer{position:absolute;z-index:6;width:6%;pointer-events:none;animation:broomTour 3.2s ease-in-out forwards;filter:drop-shadow(0 0 12px rgba(255,212,92,.9))}
+@keyframes broomTour{
+  0%{left:80%;top:59%;transform:rotate(0)}
+  15%{left:70%;top:30%;transform:rotate(-30deg)}
+  35%{left:45%;top:12%;transform:rotate(-70deg)}
+  55%{left:18%;top:26%;transform:rotate(-120deg) scaleX(-1)}
+  75%{left:30%;top:58%;transform:rotate(-200deg)}
+  90%{left:62%;top:52%;transform:rotate(-320deg)}
+  100%{left:80%;top:59%;transform:rotate(-360deg)}}
+.room-door{position:absolute;left:42.5%;top:30%;width:15%;height:47.8%;border:0;padding:0;background:none;z-index:2}
+.room-door .rd-frame{position:absolute;inset:0;border-radius:50% 50% 0 0 / 28% 28% 0 0;overflow:hidden;perspective:700px;background:#120a18}
+.room-door .rd-light{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 60%,#fffbe6,#ffe08a 30%,#c9a0ff 65%,#3a1a6a);opacity:0;transition:opacity 1.2s}
+.room-door .rd-leaf{position:absolute;inset:0;transform-origin:0 50%;transition:transform 1.8s cubic-bezier(.4,0,.2,1)}
+.room-door .rd-leaf svg{width:100%;height:100%;display:block}
+.room-door:hover .rd-leaf,.room-door:focus-visible .rd-leaf{filter:brightness(1.15)}
+.room-door.ready{animation:doorGlow 1.6s ease-in-out infinite}
+.room-door.ready .tag{display:block}
+.room-door.open .rd-leaf{transform:rotateY(-100deg)}
+.room-door.open .rd-light{opacity:1}
+.room-door .tag{display:none;position:absolute;left:50%;bottom:6%;transform:translateX(-50%);white-space:nowrap;padding:5px 14px;border-radius:999px;background:linear-gradient(180deg,#ffe9a3,var(--orange));color:#4a1d00;font-weight:700;font-size:clamp(11px,1.15vw,15px);box-shadow:0 0 18px rgba(255,200,80,.9);z-index:2}
+@keyframes doorGlow{0%,100%{filter:drop-shadow(0 0 8px #ffd45c) drop-shadow(0 0 18px #b06aff)}50%{filter:drop-shadow(0 0 22px #fff0a0) drop-shadow(0 0 46px #b06aff)}}
+.dock{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;max-width:100%}
+.chip{display:flex;align-items:center;gap:6px;padding:8px 14px;border-radius:999px;border:1px solid var(--glass-line);background:rgba(255,255,255,.08);font-size:14px;transition:.15s}
+.chip:hover{background:rgba(255,212,92,.2);transform:translateY(-2px)}
+.chip.done{background:rgba(95,224,160,.15);border-color:rgba(95,224,160,.5)}
+.chip .e{font-size:18px}
+.chip.door-chip{background:rgba(255,140,26,.2);border-color:rgba(255,140,26,.6)}
+.room-tip{font-size:13px;color:var(--ink-dim);text-align:center}
+
+/* ---------- 弹窗 ---------- */
+.backdrop{position:fixed;inset:0;z-index:50;display:flex;align-items:center;justify-content:center;padding:12px;background:radial-gradient(ellipse at center,rgba(15,6,32,.55),rgba(15,6,32,.85));animation:fadeIn .3s}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.modal{position:relative;border-radius:28px;max-height:calc(100dvh - 24px);overflow:auto;animation:rise .5s cubic-bezier(.2,.9,.3,1.2)}
+.modal .x{position:absolute;right:14px;top:14px;width:38px;height:38px;border-radius:50%;border:1px solid var(--glass-line);background:rgba(0,0,0,.3);font-size:16px;z-index:5;transition:.15s}
+.modal .x:hover{background:rgba(255,255,255,.2);transform:rotate(90deg)}
+.shake{animation:shake .5s}
+@keyframes shake{0%,100%{transform:none}20%{transform:translateX(-12px)}40%{transform:translateX(10px)}60%{transform:translateX(-7px)}80%{transform:translateX(4px)}}
+
+.task-modal{width:min(1020px,100%);display:grid;grid-template-columns:minmax(0,4fr) minmax(0,6fr)}
+.tm-art{position:relative;min-height:440px;display:flex;align-items:center;justify-content:center;overflow:hidden;border-right:1px solid var(--glass-line);
+  background:radial-gradient(circle at 50% 45%,rgba(255,180,80,.35),rgba(107,63,176,.35) 50%,rgba(15,6,32,.6))}
+.tm-art .art-inner{width:62%;max-width:280px;animation:float 3s ease-in-out infinite;filter:drop-shadow(0 18px 24px rgba(0,0,0,.5));position:relative;z-index:2}
+.tm-art .art-inner svg{width:100%;height:auto;display:block;overflow:visible}
+.tm-art .art-moon{position:absolute;right:10%;top:9%;width:70px;height:70px;border-radius:50%;background:radial-gradient(circle at 40% 40%,#fffdf0,#ffeeb0);box-shadow:0 0 40px 10px rgba(255,240,180,.4)}
+.tm-art .art-label{position:absolute;left:16px;bottom:16px;padding:6px 14px;border-radius:999px;background:rgba(0,0,0,.35);border:1px solid var(--glass-line);font-size:14px;z-index:3}
+.tm-art .glow-ring{position:absolute;width:70%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,rgba(255,212,92,.5),transparent 65%);opacity:0;transition:opacity .6s}
+.tm-art.celebrate .glow-ring{opacity:1;animation:ringPulse 1.2s ease-in-out infinite}
+@keyframes ringPulse{0%,100%{transform:scale(.9)}50%{transform:scale(1.15)}}
+.tm-art.c-pumpkin .art-inner{animation:goldPulse 1.2s ease-in-out infinite,float 3s ease-in-out infinite}
+.tm-art.c-broom .art-inner{animation:artLoop 2.4s ease-in-out}
+@keyframes artLoop{0%{transform:translate(0,0) rotate(0)}25%{transform:translate(60px,-80px) rotate(-60deg)}50%{transform:translate(0,-130px) rotate(-180deg)}75%{transform:translate(-60px,-70px) rotate(-280deg)}100%{transform:translate(0,0) rotate(-360deg)}}
+.tm-art.c-bat .art-inner{animation:toMoon 2.2s ease-in-out forwards}
+@keyframes toMoon{0%{transform:none}100%{transform:translate(42%,-60%) scale(.35)}}
+.tm-art.c-ghost .art-inner svg{animation:ghostSpin 1.4s ease-in-out}
+.tm-art .wing{transform-box:fill-box;animation:flapL .35s ease-in-out infinite alternate}
+.tm-art .wing-l{transform-origin:100% 40%}
+.tm-art .wing-r{transform-origin:0% 40%;animation-name:flapR}
+.tm-body{padding:30px 30px 26px;display:flex;flex-direction:column;gap:14px;min-width:0}
+.tm-head{display:flex;gap:8px;flex-wrap:wrap;padding-right:40px}
+.badge{padding:5px 12px;border-radius:999px;font-size:13px;background:rgba(255,140,26,.2);border:1px solid rgba(255,140,26,.55);color:var(--gold-2)}
+.badge.alt{background:rgba(185,150,240,.18);border-color:rgba(185,150,240,.5);color:#e6d6ff}
+.tm-body h2{font-family:var(--title);font-weight:400;font-size:clamp(24px,2.6vw,32px);color:#fff;letter-spacing:1px}
+.tm-prompt{font-size:16px;line-height:2;color:#f1e6ff}
+.tm-prompt .speak{vertical-align:middle;margin-left:6px}
+.tm-prompt .hl{padding:2px 10px;border-radius:8px;background:rgba(255,212,92,.18);color:var(--gold);font-weight:700}
+.feedback{min-height:24px;font-size:15px;line-height:1.6}
+.feedback.bad{color:var(--red)}
+.feedback.good{color:var(--green)}
+.hint{padding:10px 14px;border-radius:14px;background:rgba(185,150,240,.16);border:1px dashed rgba(185,150,240,.5);font-size:14px;color:#efe4ff;line-height:1.7;animation:rise .35s}
+
+/* 拖拽拼图 */
+.arrange{display:flex;flex-direction:column;gap:18px}
+.slot-row{display:flex;align-items:flex-end;gap:18px;flex-wrap:wrap}
+.slot-group{display:flex;flex-direction:column;align-items:center;gap:6px}
+.slots{display:flex;gap:8px;padding:10px;border-radius:18px;background:rgba(0,0,0,.25);border:2px dashed rgba(255,212,92,.45)}
+.slot{width:76px;height:84px;border-radius:14px;background:rgba(255,255,255,.06);border:2px solid rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;transition:.15s}
+.slot.over{border-color:var(--gold);background:rgba(255,212,92,.2);transform:scale(1.06)}
+.slots.wrong{border-color:var(--red);animation:shake .5s}
+.slots.right{border-color:var(--green);box-shadow:0 0 20px rgba(95,224,160,.5)}
+.slot-label{font-size:13px;color:var(--ink-dim)}
+.suffix{font-size:40px;font-weight:700;color:var(--gold);padding-bottom:18px}
+.pool{display:flex;gap:12px;flex-wrap:wrap;min-height:96px;padding:12px;border-radius:18px;background:rgba(255,255,255,.05);border:1px solid var(--glass-line);align-items:center}
+.pool:empty::after{content:"把卡片放回这里";font-size:13px;color:var(--ink-faint);padding-left:6px}
+.tile{width:72px;height:80px;border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;cursor:grab;user-select:none;-webkit-user-select:none;touch-action:none;
+  background:linear-gradient(180deg,#fff8e1,#ffe2a8);color:#4a2400;font-size:38px;font-weight:700;box-shadow:0 5px 0 #c9852a,0 10px 18px rgba(0,0,0,.35);transition:transform .15s,box-shadow .15s}
+.tile:hover{transform:translateY(-3px) rotate(-2deg)}
+.tile:active{cursor:grabbing}
+.tile small{font-size:12px;font-weight:500;color:#9a5a10}
+.slot .tile{width:100%;height:100%;box-shadow:0 3px 0 #c9852a}
+.tile.dragging{opacity:.3}
+.drag-ghost{position:fixed;z-index:200;pointer-events:none;transform:scale(1.12) rotate(-4deg);box-shadow:0 18px 30px rgba(0,0,0,.5)}
+.arrange.pinyin .tile{font-size:34px;font-family:"Helvetica Neue",Arial,sans-serif}
+.arrange.words .tile,.arrange.words .slot{width:108px}
+.arrange.words .tile{font-size:28px}
+.arrange.locked .tile{pointer-events:none}
+.arr-tools{display:flex;gap:10px;align-items:center}
+
+/* 选择题 */
+.q-big{font-size:clamp(46px,6vw,72px);font-weight:700;color:#fff;text-align:center;letter-spacing:8px;text-shadow:0 0 24px rgba(255,212,92,.6)}
+.q-sentence{font-size:clamp(20px,2.3vw,26px);line-height:1.8;color:#fff;padding:14px 18px;border-radius:16px;background:rgba(0,0,0,.25);border:1px solid var(--glass-line)}
+.blank{display:inline-block;min-width:3.4em;text-align:center;border-bottom:3px solid var(--gold);color:var(--gold);margin:0 4px}
+.options{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.opt{display:flex;align-items:center;gap:12px;padding:14px 16px;border-radius:16px;border:2px solid rgba(255,255,255,.18);background:rgba(255,255,255,.08);text-align:left;font-size:20px;transition:transform .15s,background .15s,border-color .15s}
+.opt:hover:not(:disabled){transform:translateY(-3px);background:rgba(255,212,92,.16);border-color:rgba(255,212,92,.7);box-shadow:0 8px 20px rgba(0,0,0,.25)}
+.opt:active:not(:disabled){transform:scale(.97)}
+.opt .letter{flex:none;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(180deg,#ffe9a3,var(--orange));color:#4a1d00;font-weight:800;font-size:16px}
+.opt small{display:block;font-size:13px;color:var(--ink-dim);font-weight:400}
+.opt.wrong{border-color:var(--red);background:rgba(255,122,138,.16);opacity:.75}
+.opt.wrong .letter{background:var(--red);color:#fff}
+.opt.right{border-color:var(--green);background:rgba(95,224,160,.2);box-shadow:0 0 20px rgba(95,224,160,.4)}
+.opt.right .letter{background:var(--green);color:#063}
+.opt:disabled{cursor:default}
+
+/* 成功面板 */
+.success{display:flex;flex-direction:column;gap:14px;animation:rise .5s}
+.success .great{font-family:var(--title);font-size:clamp(36px,4vw,48px);color:var(--gold);text-shadow:0 0 20px rgba(255,190,60,.7)}
+.vocab{display:flex;align-items:center;gap:18px;padding:16px 20px;border-radius:20px;background:linear-gradient(135deg,rgba(255,212,92,.18),rgba(185,150,240,.15));border:1px solid rgba(255,212,92,.45)}
+.vocab .vw{font-size:48px;font-weight:800;letter-spacing:6px}
+.vocab .vp{font-size:22px;color:var(--gold)}
+.vocab .ve{font-size:14px;color:var(--ink-dim)}
+.digit-get{display:flex;align-items:center;gap:16px;font-size:17px}
+.digit-big{width:74px;height:86px;border-radius:18px;display:grid;place-items:center;font-family:var(--title);font-size:58px;color:#4a1d00;background:linear-gradient(180deg,var(--gold-2),var(--orange));box-shadow:0 0 26px rgba(255,190,60,.8),0 6px 0 #a8420f;animation:pop .6s}
+.fly-digit{position:fixed;z-index:95;width:60px;height:70px;border-radius:14px;display:grid;place-items:center;font-family:var(--title);font-size:46px;color:#4a1d00;background:linear-gradient(180deg,var(--gold-2),var(--orange));box-shadow:0 0 30px rgba(255,200,80,1);transition:transform 1s cubic-bezier(.5,-0.3,.3,1),opacity 1s;pointer-events:none}
+.float-pts{position:fixed;z-index:96;font-family:var(--title);font-size:44px;color:var(--gold);text-shadow:0 0 14px rgba(255,170,40,.9),0 3px 0 #7a3a00;pointer-events:none;animation:floatUp 1.4s ease-out forwards}
+@keyframes floatUp{0%{opacity:0;transform:translate(-50%,0) scale(.6)}20%{opacity:1;transform:translate(-50%,-20px) scale(1.2)}100%{opacity:0;transform:translate(-50%,-110px) scale(1)}}
+
+/* 魔法门 */
+.door-modal{width:min(900px,100%);padding:30px;display:grid;grid-template-columns:auto 1fr;gap:28px;align-items:center}
+.door-stage{width:min(260px,60vw);aspect-ratio:2/3;position:relative;margin:auto}
+.door-frame{position:absolute;inset:0;border-radius:50% 50% 6px 6px / 33% 33% 6px 6px;border:14px solid #7a6e8a;border-bottom-width:0;box-shadow:0 0 0 4px #4a4058,0 0 40px rgba(185,150,240,.5),inset 0 0 30px rgba(0,0,0,.8);overflow:hidden;perspective:900px;background:#120a18}
+.door-light{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 60%,#ffffff,#fff1b0 25%,#ffc85c 45%,#b06aff 75%,#3a1a6a);opacity:0;transition:opacity 1.4s}
+.door-light::before{content:"";position:absolute;inset:-50%;background:repeating-conic-gradient(from 0deg,rgba(255,255,255,.35) 0 8deg,transparent 8deg 24deg);animation:rays 8s linear infinite}
+@keyframes rays{to{transform:rotate(360deg)}}
+.door-leaf{position:absolute;inset:0;transform-origin:0 50%;transition:transform 2s cubic-bezier(.4,0,.2,1)}
+.door-leaf svg{width:100%;height:100%;display:block}
+.door-stage.open .door-leaf{transform:rotateY(-104deg)}
+.door-stage.open .door-light{opacity:1}
+.door-stage.glow .door-frame{animation:doorGlow 1.6s ease-in-out infinite}
+.door-side{display:flex;flex-direction:column;gap:14px;min-width:0}
+.door-side h2{font-family:var(--title);font-weight:400;font-size:clamp(26px,3vw,36px);color:var(--gold)}
+.door-side p{color:var(--ink-dim);font-size:15px;line-height:1.7}
+.code-row{display:flex;gap:8px;flex-wrap:wrap}
+.code-box{display:flex;flex-direction:column;align-items:center;gap:4px}
+.code-box b{width:52px;height:62px;border-radius:14px;display:grid;place-items:center;font-size:32px;background:rgba(0,0,0,.35);border:2px solid rgba(255,255,255,.18)}
+.code-box.cur b{border-color:var(--gold);box-shadow:0 0 0 4px rgba(255,212,92,.2)}
+.code-box span{font-size:13px;color:var(--ink-dim)}
+.keypad{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;max-width:330px}
+.keypad button{padding:12px 0;border-radius:14px;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.08);font-size:22px;font-weight:700;transition:.12s}
+.keypad button:hover{background:rgba(255,212,92,.2);transform:translateY(-2px)}
+.keypad button:active{transform:scale(.94)}
+.keypad .ok{background:linear-gradient(180deg,#ffe9a3,var(--orange));color:#4a1d00;border:none;font-size:18px}
+.keypad .del{font-size:16px}
+
+/* ---------- 第二关：知识大厅 ---------- */
+#sc-hall{background:radial-gradient(ellipse at 50% 20%,#3b2a8a 0%,#1d1458 40%,#0b0a2a 85%)}
+.hall-deco{position:absolute;inset:0;pointer-events:none}
+.pillar{position:absolute;bottom:0;width:8%;min-width:50px;height:88%;background:linear-gradient(90deg,#2a2060,#4a3c96 40%,#2a2060);border-radius:12px 12px 0 0;box-shadow:inset 0 0 30px rgba(0,0,0,.5)}
+.pillar::before{content:"";position:absolute;top:-16px;left:-12%;right:-12%;height:28px;background:#5a4ca6;border-radius:8px}
+.pillar.l{left:3%}.pillar.r{right:3%}
+.hall-arch{position:absolute;left:50%;top:6%;transform:translateX(-50%);width:min(560px,70vw);aspect-ratio:1.2;border-radius:50% 50% 0 0;
+  background:radial-gradient(ellipse at 50% 70%,rgba(200,150,255,.55),rgba(90,40,180,.25) 50%,transparent 70%);border:6px solid rgba(185,150,240,.35);border-bottom:none;animation:glowPulse 3s ease-in-out infinite}
+.hall-floor{position:absolute;left:0;right:0;bottom:0;height:22%;background:linear-gradient(180deg,transparent,rgba(120,80,220,.18)),repeating-linear-gradient(90deg,rgba(255,255,255,.05) 0 2px,transparent 2px 80px)}
+.fcard{position:absolute;width:56px;height:72px;border-radius:10px;background:linear-gradient(180deg,#fff6dc,#f2d7a0);color:#5a2a00;display:grid;place-items:center;font-size:26px;font-weight:800;box-shadow:0 0 20px rgba(255,212,92,.5);animation:cardFloat 6s ease-in-out infinite;opacity:.85}
+@keyframes cardFloat{0%,100%{transform:translateY(0) rotate(-8deg)}50%{transform:translateY(-24px) rotate(8deg)}}
+.hall-main{position:absolute;inset:0;display:flex;padding:16px;overflow:auto}
+.hall-main>*{margin:auto}
+.book-cover{width:min(560px,94vw);border-radius:20px 26px 26px 20px;padding:40px 36px;text-align:center;position:relative;
+  background:linear-gradient(135deg,#7a1d48,#4a0f2c 70%);border:4px solid #d4af55;box-shadow:inset 0 0 0 10px rgba(0,0,0,.18),inset 0 0 0 12px rgba(212,175,85,.6),0 30px 60px rgba(0,0,0,.6),-12px 0 0 #3a0a20;animation:rise .7s}
+.book-cover .emblem{font-size:72px;filter:drop-shadow(0 0 20px rgba(255,212,92,.8));animation:float 3s ease-in-out infinite}
+.book-cover h2{font-family:var(--title);font-weight:400;font-size:clamp(30px,4vw,44px);color:var(--gold);margin:8px 0 14px;text-shadow:0 0 18px rgba(255,190,60,.6)}
+.book-cover p{font-size:17px;line-height:1.8;color:#ffe8f2;margin-bottom:12px}
+.book-cover .rules{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:14px 0 26px}
+.book-cover .rules span{padding:6px 12px;border-radius:999px;background:rgba(0,0,0,.25);border:1px solid rgba(212,175,85,.5);font-size:14px;color:var(--gold-2)}
+.book{display:grid;grid-template-columns:1fr 1fr;width:min(1000px,96vw);position:relative;animation:bookOpen .8s cubic-bezier(.2,.9,.3,1.1);filter:drop-shadow(0 30px 40px rgba(0,0,0,.6))}
+.book::before{content:"";position:absolute;inset:-14px -16px;border-radius:18px;background:linear-gradient(135deg,#7a1d48,#3a0f22);border:3px solid #d4af55;z-index:-1}
+@keyframes bookOpen{from{opacity:0;transform:perspective(1200px) rotateX(20deg) scale(.85)}to{opacity:1;transform:none}}
+.page{background:linear-gradient(90deg,#f1dfb6,#fbf2da 45%,#f6e6c2);color:#3a2412;padding:34px 36px;min-height:min(500px,62vh);position:relative;display:flex;flex-direction:column;gap:16px}
+.page.left{border-radius:12px 0 0 12px;box-shadow:inset -22px 0 30px -14px rgba(110,60,10,.5)}
+.page.right{border-radius:0 12px 12px 0;box-shadow:inset 22px 0 30px -14px rgba(110,60,10,.5)}
+.page .q-num{font-family:var(--title);font-size:22px;color:#8a3a10}
+.q-dots{display:flex;gap:8px}
+.q-dots i{width:14px;height:14px;border-radius:50%;background:#e2c99a;border:2px solid #b8925a}
+.q-dots i.cur{background:var(--orange);border-color:#a8420f;transform:scale(1.2)}
+.q-dots i.ok{background:var(--green);border-color:#1e8a55}
+.q-dots i.no{background:var(--red);border-color:#b03040}
+.page .q-text{font-size:clamp(24px,2.8vw,32px);line-height:1.6;font-weight:800;color:#2a1608;flex:1;display:flex;align-items:center}
+.page .page-score{font-size:15px;color:#7a5a30}
+.page .page-score b{color:#c0500a;font-size:20px}
+.page .opt{background:#fff8e6;border-color:#e0c68e;color:#3a2412;box-shadow:0 3px 0 #d8b878}
+.page .opt:hover:not(:disabled){background:#fff1c8;border-color:var(--orange)}
+.page .opt.right{background:#d8f7e6;border-color:#2aa36a}
+.page .opt.wrong{background:#ffe0e4;border-color:#d04050;opacity:1}
+.page .options{grid-template-columns:1fr}
+.page .explain{padding:12px 14px;border-radius:14px;background:#fff3d0;border:1px dashed #d0a050;font-size:15px;line-height:1.7;color:#4a2a10;animation:rise .4s}
+.page .explain.good{background:#e2f8ec;border-color:#2aa36a}
+.page .explain b{color:#c0500a}
+.page .actions{display:flex;justify-content:flex-end;gap:10px;margin-top:auto}
+.result-big{font-family:var(--title);font-size:clamp(46px,6vw,72px);color:#c0500a;text-align:center}
+.result-stars{font-size:40px;text-align:center;letter-spacing:6px}
+.key-wrap{position:relative;height:140px;display:flex;align-items:center;justify-content:center}
+.key-svg{width:150px;filter:drop-shadow(0 0 20px rgba(255,200,60,.9));animation:keyFly 1.8s cubic-bezier(.2,.9,.3,1.2) both}
+@keyframes keyFly{0%{transform:translateY(120px) scale(.2) rotate(-90deg);opacity:0}60%{transform:translateY(-30px) scale(1.2) rotate(20deg);opacity:1}100%{transform:translateY(0) scale(1) rotate(-12deg)}}
+.key-svg.idle{animation:float 2.6s ease-in-out infinite}
+
+/* ---------- 第三关：南瓜花园 ---------- */
+#sc-garden{background:linear-gradient(180deg,#060d33 0%,#0e1a56 40%,#2a2475 75%,#1a1040 100%)}
+.g-moon{position:absolute;right:7%;top:calc(var(--top) + 3%);width:clamp(110px,15vw,200px);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 38% 38%,#fffef4,#fff0b8 60%,#f0d070);box-shadow:0 0 70px 24px rgba(255,240,180,.4),0 0 200px 80px rgba(255,230,150,.12)}
+.g-hills{position:absolute;left:0;right:0;bottom:0;width:100%;height:42%}
+.g-cottage{position:absolute;left:2%;bottom:16%;width:clamp(110px,14vw,200px)}
+.lantern{position:absolute;bottom:14%;width:clamp(26px,3vw,40px);animation:float 3s ease-in-out infinite}
+.garden-main{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;gap:10px;padding:10px 16px 16px;overflow:auto}
+.garden-main>:first-child{margin-top:auto}.garden-main>:last-child{margin-bottom:auto}
+.garden-head{text-align:center}
+.garden-head h2{font-family:var(--title);font-weight:400;font-size:clamp(30px,4.4vw,52px);color:var(--orange-2);text-shadow:0 0 22px rgba(255,140,30,.7),0 3px 0 #5a2000}
+.garden-head p{color:#fff;font-size:clamp(15px,1.7vw,19px);margin-top:4px}
+.garden-head .rule{display:inline-block;margin-top:8px;padding:4px 14px;border-radius:999px;background:rgba(255,212,92,.16);border:1px solid rgba(255,212,92,.5);color:var(--gold-2);font-size:13px}
+.pk-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(8px,1.6vw,20px);width:min(600px,92vw,calc((100dvh - var(--top) - 190px) * 1.05))}
+.pk-btn{position:relative;border:none;background:radial-gradient(circle at 50% 70%,rgba(255,170,60,.18),transparent 65%);border-radius:24px;padding:4px 4px 6px;display:flex;flex-direction:column;align-items:center;transition:transform .25s,filter .25s}
+.pk-btn .pk-art{width:84%;animation:float 2.8s ease-in-out infinite;animation-delay:var(--d)}
+.pk-btn .pk-art svg{width:100%;height:auto;display:block;overflow:visible}
+.pk-btn .pk-name{font-size:clamp(11px,1.3vw,15px);padding:3px 10px;border-radius:999px;background:rgba(15,6,32,.6);border:1px solid var(--glass-line);margin-top:-4px;white-space:nowrap}
+.pk-btn:hover:not(:disabled),.pk-btn:focus-visible{outline:none;transform:scale(1.1);filter:drop-shadow(0 0 16px rgba(255,200,80,.9)) drop-shadow(0 0 30px rgba(255,140,30,.6))}
+.pk-btn:active:not(:disabled){transform:scale(.96)}
+.pk-btn:disabled{cursor:default}
+.pk-grid.locked .pk-btn:not(.picked){filter:grayscale(.75) brightness(.55);opacity:.7}
+.pk-btn.shaking .pk-art{animation:pkShake .14s linear infinite}
+@keyframes pkShake{0%{transform:rotate(-8deg) translateX(-3px)}50%{transform:rotate(8deg) translateX(3px)}100%{transform:rotate(-8deg) translateX(-3px)}}
+.pk-btn.spinning .pk-art{animation:pkSpin .8s cubic-bezier(.5,0,.5,1)}
+@keyframes pkSpin{from{transform:rotateY(0) scale(1)}to{transform:rotateY(720deg) scale(1.25)}}
+.pk-btn.picked{z-index:3}
+.pk-btn.opened .pk-art{animation:none;filter:brightness(1.3) drop-shadow(0 0 24px #ffe08a)}
+.pk-btn .pk-reveal{position:absolute;left:50%;top:28%;transform:translate(-50%,-50%);font-size:clamp(32px,5vw,56px);display:none;animation:revealUp .6s cubic-bezier(.2,1.4,.4,1) both;filter:drop-shadow(0 0 12px rgba(255,255,255,.9))}
+.pk-btn.opened .pk-reveal{display:block}
+@keyframes revealUp{from{opacity:0;transform:translate(-50%,10%) scale(.2)}to{opacity:1;transform:translate(-50%,-60%) scale(1)}}
+.pk-btn.picked::after{content:"";position:absolute;inset:-6px;border-radius:26px;border:3px solid var(--gold);box-shadow:0 0 24px rgba(255,212,92,.8);pointer-events:none}
+.garden-actions{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+
+.reward-modal{width:min(520px,100%);padding:36px 30px 30px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:14px;overflow:hidden}
+.reward-modal .rw-burst{position:absolute;left:50%;top:110px;width:420px;height:420px;transform:translate(-50%,-50%);background:repeating-conic-gradient(from 0deg,rgba(255,212,92,.25) 0 10deg,transparent 10deg 30deg);border-radius:50%;animation:rays 10s linear infinite;pointer-events:none;-webkit-mask:radial-gradient(circle,#000 30%,transparent 70%);mask:radial-gradient(circle,#000 30%,transparent 70%)}
+.reward-modal .rw-icon{font-size:96px;position:relative;animation:pop .7s;filter:drop-shadow(0 0 24px rgba(255,212,92,.9))}
+.reward-modal h2{font-family:var(--title);font-weight:400;font-size:clamp(24px,3vw,32px);color:#fff;line-height:1.5;position:relative}
+.reward-modal .rw-from{color:var(--ink-dim);font-size:14px;position:relative}
+.reward-modal .rw-note{padding:8px 16px;border-radius:12px;background:rgba(255,212,92,.14);border:1px solid rgba(255,212,92,.45);color:var(--gold-2);font-size:15px;position:relative}
+.reward-modal .actions{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:8px;position:relative}
+
+/* ---------- 结束界面 ---------- */
+#sc-end{background:linear-gradient(180deg,#060d33,#2a1660 60%,#1a0a30)}
+.end-main{position:absolute;inset:0;display:flex;padding:16px;overflow:auto}
+.end-card{width:min(720px,100%);border-radius:30px;padding:34px 34px 28px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:14px;animation:rise .7s;margin:auto}
+.end-card .trophy{font-size:80px;animation:float 3s ease-in-out infinite;filter:drop-shadow(0 0 24px rgba(255,212,92,.9))}
+.end-card h1{font-family:var(--title);font-weight:400;font-size:clamp(26px,3.6vw,40px);color:var(--gold);text-shadow:0 0 18px rgba(255,190,60,.6)}
+.end-score{display:flex;align-items:baseline;gap:10px;font-size:20px}
+.end-score b{font-family:var(--title);font-size:clamp(64px,9vw,96px);color:#fff;text-shadow:0 0 30px rgba(255,190,60,.9)}
+.end-list{list-style:none;display:flex;flex-direction:column;gap:8px;text-align:left;width:min(480px,100%)}
+.end-list li{padding:10px 16px;border-radius:14px;background:rgba(0,0,0,.25);border:1px solid var(--glass-line);font-size:16px}
+.end-list li b{color:var(--gold)}
+.vocab-chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.vchip{display:flex;align-items:center;gap:6px;padding:6px 8px 6px 14px;border-radius:999px;background:rgba(255,212,92,.12);border:1px solid rgba(255,212,92,.4);font-size:16px}
+.vchip .py{color:var(--gold);font-size:13px}
+.vchip .speak{width:30px;height:30px;font-size:14px}
+.hh{font-family:var(--title);font-size:clamp(22px,3vw,32px);color:var(--orange-2);text-shadow:0 0 16px rgba(255,140,30,.6)}
+.name-field{display:flex;align-items:center;gap:10px;font-size:15px;color:var(--ink-dim);flex-wrap:wrap;justify-content:center}
+.name-field input{padding:10px 14px;border-radius:12px;border:1px solid rgba(255,255,255,.25);background:rgba(0,0,0,.3);color:#fff;font-size:16px;font-family:inherit;outline:none;width:200px}
+.name-field input:focus{border-color:var(--orange);box-shadow:0 0 0 3px rgba(255,140,26,.25)}
+.end-actions{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+.card-modal{width:min(520px,100%);padding:24px;text-align:center;display:flex;flex-direction:column;gap:14px;align-items:center}
+.card-modal img{width:100%;max-width:400px;border-radius:16px;box-shadow:0 10px 30px rgba(0,0,0,.5)}
+.card-modal p{font-size:14px;color:var(--ink-dim)}
+
+/* 通用提示 */
+#toast{position:fixed;left:50%;top:calc(var(--top) + 14px);transform:translate(-50%,-10px);z-index:95;padding:12px 22px;border-radius:999px;font-size:15px;opacity:0;transition:.35s;pointer-events:none;max-width:92vw;text-align:center}
+#toast.show{opacity:1;transform:translate(-50%,0)}
+#banner{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%) scale(.6);z-index:88;padding:26px 40px;border-radius:26px;text-align:center;opacity:0;pointer-events:none;transition:.5s cubic-bezier(.2,1.4,.4,1);width:max-content;max-width:92vw}
+#banner.show{opacity:1;transform:translate(-50%,-50%) scale(1)}
+#banner h3{font-family:var(--title);font-weight:400;font-size:clamp(24px,3.4vw,40px);color:var(--gold);text-shadow:0 0 18px rgba(255,190,60,.7)}
+#banner p{margin-top:6px;font-size:17px;color:#fff}
+.confirm-modal{width:min(420px,100%);padding:30px;text-align:center;display:flex;flex-direction:column;gap:18px}
+.confirm-modal h3{font-family:var(--title);font-weight:400;font-size:26px;color:var(--gold)}
+.confirm-modal .actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+
+/* ---------- 响应式 ---------- */
+@media (max-width:860px){
+  .task-modal{grid-template-columns:1fr}
+  .tm-art{min-height:190px;border-right:none;border-bottom:1px solid var(--glass-line)}
+  .tm-art .art-inner{width:auto;height:160px;max-width:none}
+  .tm-art .art-inner svg{height:160px;width:auto}
+  .tm-body{padding:20px 18px}
+  .door-modal{grid-template-columns:1fr;padding:22px 18px}
+  .door-stage{width:min(170px,44vw)}
+  .book{grid-template-columns:1fr}
+  .page{min-height:auto;padding:22px 20px}
+  .page.left{border-radius:12px 12px 0 0;box-shadow:inset 0 -18px 24px -14px rgba(110,60,10,.45)}
+  .page.right{border-radius:0 0 12px 12px;box-shadow:inset 0 18px 24px -14px rgba(110,60,10,.45)}
+  .page .q-text{font-size:22px}
+  .pillar{display:none}
+}
+@media (max-width:600px){
+  #topbar{padding:8px 10px;gap:6px}
+  .tb-brand,.stat.stage,.rs-text{display:none}
+  .tb-stats{gap:6px}
+  .tb-actions{margin-left:auto}
+  .icon-btn{height:32px;min-width:32px}
+  .stat{font-size:12px;padding:5px 9px}
+  .stat b{font-size:15px}
+  .pw{margin-left:0;flex:1;justify-content:flex-start}
+  .pw-slot{width:30px;height:36px}
+  .slot{width:60px;height:68px}
+  .tile{width:58px;height:66px;font-size:30px}
+  .arrange.words .tile,.arrange.words .slot{width:84px}
+  .arrange.words .tile{font-size:22px}
+  .options{grid-template-columns:1fr}
+  .opt{font-size:18px;padding:11px 14px}
+  .code-box b{width:42px;height:52px;font-size:26px}
+  .vocab .vw{font-size:38px}
+  .chip{padding:6px 10px;font-size:12px}
+  .end-card{padding:24px 18px}
+}
+@media (prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.2s!important}}
+</style>
+</head>
+<body>
+<noscript><p style="padding:40px;font-size:20px">请开启 JavaScript 来运行这个游戏。</p></noscript>
+
+<!-- 顶部状态栏 -->
+<header id="topbar" class="hidden">
+  <div class="tb-brand">🎃 <span>万圣节魔法屋</span></div>
+  <div class="tb-stats">
+    <div class="stat">⭐ 当前积分：<b id="tbScore">0</b></div>
+    <div class="stat">🔑 已收集线索：<b id="tbClues">0</b>/6</div>
+    <div class="stat stage" id="tbStage">第一关</div>
+  </div>
+  <div class="pw" id="pwSlots" aria-label="六位密码槽"></div>
+  <div class="tb-actions">
+    <button class="icon-btn" id="muteBtn" title="音效开关" aria-label="音效开关">🔊</button>
+    <button class="icon-btn" id="restartBtn" title="重新开始">🔄 <span class="rs-text">重新开始</span></button>
+  </div>
+</header>
+
+<!-- 开始界面 -->
+<section class="scene active" id="sc-start">
+  <div class="stars" id="startStars"></div>
+  <div class="start-moon"></div>
+  <div id="startFlyers"></div>
+  <div id="castleHolder"></div>
+  <div class="start-ui" id="startMain">
+    <h1 class="game-title"><span class="emo">🎃</span> 万圣节魔法屋</h1>
+    <p class="game-sub">「六个秘密，一扇魔法门，你能逃出去吗？」</p>
+    <p class="game-sub2">六把钥匙大逃脱 · Halloween Magic House</p>
+    <button class="btn huge" id="enterBtn">🚪 进入魔法屋</button>
+  </div>
+  <div class="start-ui hidden" id="storyPanel">
+    <div class="story glass">
+      <div class="ghost-mini" id="storyGhost"></div>
+      <p>欢迎来到<b>万圣节魔法屋</b>！<br>调皮的小幽灵把大门锁住了！<br>你必须完成<b>六个中文挑战</b>，收集<b>六个神秘数字</b>，<br>才能打开魔法门。<br>准备好了吗？</p>
+      <button class="btn huge" id="adventureBtn">开始冒险！</button>
+    </div>
+  </div>
+</section>
+
+<!-- 第一关：魔法屋 -->
+<section class="scene" id="sc-room">
+  <div class="content">
+    <div class="room-layout">
+      <div class="room" id="room"></div>
+      <div class="dock" id="dock"></div>
+      <div class="room-tip" id="roomTip">点击房间里闪着「!」的物品，完成六个中文挑战，收集六个神秘数字</div>
+    </div>
+  </div>
+</section>
+
+<!-- 第二关：魔法知识大厅 -->
+<section class="scene" id="sc-hall">
+  <div class="content">
+    <div class="hall-deco" id="hallDeco"></div>
+    <div class="hall-main" id="hallMain"></div>
+  </div>
+</section>
+
+<!-- 第三关：南瓜花园 -->
+<section class="scene" id="sc-garden">
+  <div class="stars" id="gardenStars"></div>
+  <div class="g-moon"></div>
+  <div id="gardenDeco"></div>
+  <div class="content">
+    <div class="garden-main" id="gardenMain"></div>
+  </div>
+</section>
+
+<!-- 结束界面 -->
+<section class="scene" id="sc-end">
+  <div class="stars" id="endStars"></div>
+  <div class="content"><div class="end-main" id="endMain"></div></div>
+</section>
+
+<canvas id="fxBack"></canvas>
+<canvas id="fxFront"></canvas>
+
+<!-- 任务弹窗 -->
+<div class="backdrop hidden" id="taskModal">
+  <div class="modal glass task-modal" id="taskBox">
+    <button class="x" data-close="taskModal" aria-label="关闭">✕</button>
+    <div class="tm-art" id="tmArt"></div>
+    <div class="tm-body">
+      <div class="tm-head" id="tmHead"></div>
+      <h2 id="tmTitle"></h2>
+      <div class="tm-prompt" id="tmPrompt"></div>
+      <div id="tmPlay"></div>
+      <div class="feedback" id="tmFb"></div>
+      <div id="tmHint"></div>
+    </div>
+  </div>
+</div>
+
+<!-- 魔法门弹窗 -->
+<div class="backdrop hidden" id="doorModal">
+  <div class="modal glass door-modal" id="doorBox">
+    <button class="x" data-close="doorModal" aria-label="关闭">✕</button>
+    <div class="door-stage glow" id="doorStage">
+      <div class="door-frame"><div class="door-light"></div><div class="door-leaf" id="doorLeaf"></div></div>
+    </div>
+    <div class="door-side">
+      <h2>✨ 魔法门</h2>
+      <div id="doorInput">
+        <p>按照<b style="color:var(--gold)">任务编号顺序</b>（🎃→🧙‍♀️→🧹→🕯️→🦇→👻）输入六位密码。可以点击数字，也可以用键盘输入。</p>
+        <div class="code-row" id="codeRow" style="margin:12px 0"></div>
+        <div class="keypad" id="keypad"></div>
+      </div>
+      <div class="feedback" id="doorFb"></div>
+      <div id="doorNext" class="hidden" style="display:flex;flex-direction:column;gap:14px;align-items:flex-start">
+        <div style="font-family:var(--title);font-size:30px;color:var(--gold)">成功解锁！欢迎进入第二关！</div>
+        <button class="btn" id="toHallBtn">✨ 进入第二关</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 南瓜奖励弹窗 -->
+<div class="backdrop hidden" id="rewardModal">
+  <div class="modal glass reward-modal" id="rewardBox"></div>
+</div>
+
+<!-- 成绩卡预览 -->
+<div class="backdrop hidden" id="cardModal">
+  <div class="modal glass card-modal">
+    <button class="x" data-close="cardModal" aria-label="关闭">✕</button>
+    <h3 style="font-family:var(--title);font-weight:400;font-size:26px;color:var(--gold)">📸 我的万圣节成绩卡</h3>
+    <img id="cardImg" alt="成绩卡">
+    <p>图片已开始下载。如果没有自动下载：电脑请右键图片「另存为」，手机请长按图片保存。</p>
+    <button class="btn small" id="cardDownload">⬇️ 再次下载</button>
+  </div>
+</div>
+
+<!-- 确认弹窗 -->
+<div class="backdrop hidden" id="confirmModal">
+  <div class="modal glass confirm-modal">
+    <h3>🔄 重新开始？</h3>
+    <p style="color:var(--ink-dim);line-height:1.7">当前的进度和积分会被清空，南瓜奖励也会重新随机分配。</p>
+    <div class="actions"><button class="btn small purple" data-close="confirmModal">继续游戏</button><button class="btn small" id="confirmRestart">重新开始</button></div>
+  </div>
+</div>
+
+<div id="toast" class="glass"></div>
+<div id="banner" class="glass"></div>
+<div id="warp"></div>
+
+<script>
+/* ============================================================
+   1. 可修改的游戏数据（老师可以直接修改这里）
+   ============================================================ */
+
+// 积分规则
+const SCORE_RULES = { task: 5, quiz: 10, passCount: 3 };
+
+// 第一关：六个词汇任务（按任务编号排列；digit 依次组成六位密码）
+// type: 'arrange' 拖拽排列；'choice' 选择题
+const VOCAB_TASKS = [
+  { id:'pumpkin', order:1, emoji:'🎃', word:'南瓜', pinyin:'nán guā', english:'pumpkin', digit:3,
+    type:'arrange', kind:'汉字拼图', mode:'hanzi',
+    prompt:'把汉字拖到格子里，拼出这个词：<span class="hl py">nán guā</span>（也可以直接点击汉字）',
+    tiles:[{text:'南'},{text:'瓜'}], groups:[2], answer:['南','瓜'],
+    hints:['先听一听发音 🔊，想一想哪个字读 nán。','提示：“南”是方向（南方 nánfāng），放在前面；“瓜”放在后面。'] },
+  { id:'witch', order:2, emoji:'🧙‍♀️', word:'女巫', pinyin:'nǚ wū', english:'witch', digit:7,
+    type:'arrange', kind:'拼音字母拼图', mode:'pinyin',
+    prompt:'这是 <span class="hl">女巫</span>。把拼音字母放进两个音节格子里，拼出它的读音（注意声调！）',
+    tiles:[{text:'n'},{text:'ǚ'},{text:'w'},{text:'ū'}], groups:[2,2], groupLabels:['女','巫'], answer:['n','ǚ','w','ū'],
+    hints:['每个音节都是「声母 + 韵母」，声调在韵母上。','提示：第一个音节是 n + ǚ，第二个音节是 w + ū。'] },
+  { id:'broom', order:3, emoji:'🧹', word:'扫把', pinyin:'sào ba', english:'broom', digit:2,
+    type:'arrange', kind:'词语造句', mode:'words',
+    prompt:'用下面的词语组成一个完整的句子。',
+    tiles:[{text:'女巫',py:'nǚwū'},{text:'骑着',py:'qízhe'},{text:'扫把',py:'sàoba'}], groups:[3], suffix:'。', answer:['女巫','骑着','扫把'],
+    hints:['中文句子的顺序常常是：谁 + 做什么 + 什么。','提示：先说“谁”（女巫），再说“做什么”（骑着），最后说“什么”（扫把）。'] },
+  { id:'candle', order:4, emoji:'🕯️', word:'蜡烛', pinyin:'là zhú', english:'candle', digit:9,
+    type:'choice', kind:'看图选词', question:'这是什么？', showPinyin:true,
+    prompt:'看左边的图片，选出正确的词语。',
+    options:[{text:'南瓜',py:'nán guā'},{text:'蜡烛',py:'là zhú'},{text:'扫把',py:'sào ba'},{text:'幽灵',py:'yōu líng'}], answer:'蜡烛',
+    hints:['仔细看左边的图片哦。','提示：它有小小的火苗，晚上可以照亮房间。'] },
+  { id:'bat', order:5, emoji:'🦇', word:'蝙蝠', pinyin:'biān fú', english:'bat', digit:5,
+    type:'choice', kind:'拼音配对', bigText:'蝙蝠',
+    prompt:'看汉字，选出正确的拼音。',
+    options:[{text:'biān fú'},{text:'biàn fú'},{text:'biān fǔ'},{text:'piān fú'}], answer:'biān fú',
+    hints:['注意声母是 b 还是 p，再听一听声调。','提示：“蝙”是第一声（ā 平平的），“蝠”是第二声（á 往上扬）。'] },
+  { id:'ghost', order:6, emoji:'👻', word:'幽灵', pinyin:'yōu líng', english:'ghost', digit:1,
+    type:'choice', kind:'句子填空', sentence:'万圣节的晚上，我看见了一个______。', showPinyin:true,
+    prompt:'选择合适的词语，完成句子。',
+    options:[{text:'幽灵',py:'yōu líng'},{text:'苹果',py:'píngguǒ'},{text:'老师',py:'lǎoshī'},{text:'书包',py:'shūbāo'}], answer:'幽灵',
+    hints:['想一想：万圣节的晚上会出现什么？','提示：它白白的、会飘来飘去，左边的图片就是它！'] },
+];
+
+// 第二关：五道万圣节知识题
+const QUIZ = [
+  { q:'万圣节通常是哪一天？', options:['1月1日','10月31日','12月25日','2月14日'], answer:'10月31日',
+    explain:'万圣节在每年的 10月31日 晚上。1月1日是元旦，12月25日是圣诞节，2月14日是情人节。' },
+  { q:'万圣节最有代表性的装饰是什么？', options:['南瓜灯','圣诞树','红灯笼','月饼'], answer:'南瓜灯',
+    explain:'南瓜灯是万圣节最有代表性的装饰。圣诞树属于圣诞节，红灯笼和月饼常见于中国的传统节日。' },
+  { q:'万圣节时，孩子们常常说什么？', options:['新年快乐','生日快乐','不给糖就捣蛋','早上好'], answer:'不给糖就捣蛋',
+    explain:'孩子们穿上服装去敲门，说“不给糖就捣蛋！”（Trick or treat!）' },
+  { q:'在万圣节故事中，女巫常常骑着什么飞行？', options:['自行车','扫把','飞机','汽车'], answer:'扫把',
+    explain:'故事里的女巫常常骑着扫把（sàoba）在夜空中飞行。' },
+  { q:'下面哪一种动物经常出现在万圣节装饰中？', options:['熊猫','海豚','蝙蝠','长颈鹿'], answer:'蝙蝠',
+    explain:'蝙蝠（biānfú）和黑猫、蜘蛛一样，经常出现在万圣节装饰中。' },
+];
+
+// 第三关：九种南瓜奖励（每局重新随机分配到九个南瓜里）
+// kind: points 积分 / prize 实物 / challenge 趣味挑战 / title 称号
+const REWARDS = [
+  { icon:'⭐', text:'恭喜！获得5积分！', points:5, kind:'points', label:'⭐ 5积分' },
+  { icon:'🎁', text:'恭喜！获得神秘小礼物一份！', points:0, kind:'prize', label:'🎁 神秘小礼物一份' },
+  { icon:'😂', text:'趣味挑战：请模仿女巫说一句中文！', points:0, kind:'challenge', label:'😂 趣味挑战：模仿女巫说中文' },
+  { icon:'⭐', text:'恭喜！获得10积分！', points:10, kind:'points', label:'⭐ 10积分' },
+  { icon:'🎤', text:'中文挑战：请用「万圣节」说一个句子！', points:0, kind:'challenge', label:'🎤 中文挑战：用「万圣节」造句' },
+  { icon:'🍬', text:'恭喜！获得一颗糖果！', points:0, kind:'prize', label:'🍬 糖果一颗' },
+  { icon:'🕺', text:'趣味挑战：请做一个最可爱的幽灵动作！', points:0, kind:'challenge', label:'🕺 趣味挑战：可爱幽灵动作' },
+  { icon:'⭐', text:'恭喜！获得15积分！', points:15, kind:'points', label:'⭐ 15积分', big:true },
+  { icon:'👑', text:'超级幸运！获得万圣节幸运之星称号！', points:0, kind:'title', label:'👑 万圣节幸运之星称号', big:true },
+];
+
+// 九个南瓜的造型（位置固定，奖励随机）
+const PUMPKINS = [
+  { style:'happy', name:'开心南瓜' }, { style:'naughty', name:'调皮南瓜' }, { style:'magic', name:'魔法南瓜' },
+  { style:'sleepy', name:'睡觉南瓜' }, { style:'angry', name:'生气南瓜' }, { style:'hat', name:'戴帽子南瓜' },
+  { style:'glow', name:'发光南瓜' }, { style:'ghost', name:'幽灵南瓜' }, { style:'gold', name:'黄金南瓜' },
+];
+
+// 房间里六个物品的位置：[left%, top%, width%]（相对于 16:9 的房间画面）
+const ROOM_POS = {
+  pumpkin:[29.5,64,9.5], witch:[63.8,50,10.5], broom:[80.5,58,6], candle:[13,67.5,4.6], bat:[70,5,10], ghost:[21.5,9,8],
+};
+
+/* ============================================================
+   2. 工具函数
+   ============================================================ */
+const $ = s => document.querySelector(s);
+const $$ = s => Array.from(document.querySelectorAll(s));
+const wait = ms => new Promise(r => setTimeout(r, ms));
+function rand(n){
+  try { const a = new Uint32Array(1); crypto.getRandomValues(a); return a[0] % n; }
+  catch(e){ return Math.floor(Math.random() * n); }
+}
+function shuffle(arr){ const a = arr.slice(); for (let i = a.length - 1; i > 0; i--){ const j = rand(i + 1); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const LETTERS = ['A','B','C','D','E','F'];
+const PASSWORD = () => VOCAB_TASKS.map(t => t.digit).join('');
+
+/* ============================================================
+   3. 游戏状态与存档（localStorage）
+   ============================================================ */
+const STORE_KEY = 'halloween-magic-house-v1';
+function newQuiz(attempt){
+  const order = shuffle(QUIZ.map((_, i) => i));
+  return { attempt, started:false, order, opts: order.map(i => shuffle(QUIZ[i].options.map((_, k) => k))), idx:0, answers:[], done:false, passed:false };
+}
+function newState(muted){
+  return { stage:'start', solved:{}, doorOpen:false, quiz:newQuiz(1), rewardMap: shuffle(REWARDS.map((_, i) => i)), picked:null, name:'', muted:!!muted };
+}
+function loadState(){
+  try { const s = JSON.parse(localStorage.getItem(STORE_KEY)); if (s && s.quiz && Array.isArray(s.rewardMap)) return s; } catch(e){}
+  return null;
+}
+function save(){ try { localStorage.setItem(STORE_KEY, JSON.stringify(S)); } catch(e){} }
+let S = loadState() || newState(false);
+
+const solvedCount = () => VOCAB_TASKS.filter(t => S.solved[t.id]).length;
+const allSolved = () => solvedCount() === VOCAB_TASKS.length;
+const quizCorrect = () => S.quiz.answers.filter(a => a && a.correct).length;
+const pickedReward = () => S.picked == null ? null : REWARDS[S.rewardMap[S.picked]];
+function score(){
+  const r = pickedReward();
+  return solvedCount() * SCORE_RULES.task + quizCorrect() * SCORE_RULES.quiz + (r ? (r.points || 0) : 0);
+}
+// 防止跳关：根据真实进度校正当前关卡
+function canEnter(stage){
+  if (stage === 'hall') return allSolved() && S.doorOpen;
+  if (stage === 'garden') return canEnter('hall') && S.quiz.passed;
+  if (stage === 'end') return canEnter('garden') && S.picked != null;
+  return true;
+}
+function sanitize(){
+  const valid = new Set(VOCAB_TASKS.map(t => t.id));
+  Object.keys(S.solved).forEach(k => { if (!valid.has(k)) delete S.solved[k]; });
+  if (!allSolved()) S.doorOpen = false;
+  if (S.quiz.passed && !(S.quiz.done && quizCorrect() >= SCORE_RULES.passCount)) S.quiz.passed = false;
+  if (S.rewardMap.length !== REWARDS.length) S.rewardMap = shuffle(REWARDS.map((_, i) => i));
+  if (!canEnter(S.stage)) S.stage = canEnter('garden') ? 'garden' : canEnter('hall') ? 'hall' : (S.stage === 'start' ? 'start' : 'room');
+}
+sanitize();
+
+/* ============================================================
+   4. 音效（Web Audio API 原生生成）
+   ============================================================ */
+const Sound = {
+  ctx:null,
+  ensure(){
+    if (!this.ctx){ const AC = window.AudioContext || window.webkitAudioContext; if (!AC) return null; this.ctx = new AC(); }
+    if (this.ctx.state === 'suspended') this.ctx.resume();
+    return this.ctx;
+  },
+  tone(f, d = .15, type = 'sine', v = .08, delay = 0, slide){
+    const c = this.ensure(); if (!c) return;
+    const t = c.currentTime + delay, o = c.createOscillator(), g = c.createGain();
+    o.type = type; o.frequency.setValueAtTime(f, t);
+    if (slide) o.frequency.exponentialRampToValueAtTime(slide, t + d);
+    g.gain.setValueAtTime(.0001, t); g.gain.exponentialRampToValueAtTime(v, t + .015); g.gain.exponentialRampToValueAtTime(.0001, t + d);
+    o.connect(g).connect(c.destination); o.start(t); o.stop(t + d + .05);
+  },
+  noise(d = .4, v = .05, delay = 0, freq = 1200){
+    const c = this.ensure(); if (!c) return;
+    const len = Math.floor(c.sampleRate * d), buf = c.createBuffer(1, len, c.sampleRate), data = buf.getChannelData(0);
+    for (let i = 0; i < len; i++) data[i] = (Math.random() * 2 - 1) * (1 - i / len);
+    const src = c.createBufferSource(), f = c.createBiquadFilter(), g = c.createGain(), t = c.currentTime + delay;
+    src.buffer = buf; f.type = 'bandpass'; f.frequency.setValueAtTime(freq, t); f.frequency.exponentialRampToValueAtTime(freq * 3, t + d);
+    g.gain.setValueAtTime(v, t); g.gain.exponentialRampToValueAtTime(.0001, t + d);
+    src.connect(f).connect(g).connect(c.destination); src.start(t);
+  },
+  play(name){
+    if (S.muted) return;
+    try {
+      switch (name){
+        case 'click': this.tone(1320, .08, 'sine', .05); this.tone(1980, .12, 'sine', .035, .05); break;
+        case 'correct': [523, 659, 784, 1047].forEach((f, i) => this.tone(f, .28, 'triangle', .08, i * .07)); break;
+        case 'wrong': this.tone(392, .22, 'sine', .05, 0, 330); this.tone(330, .3, 'sine', .045, .16, 262); break;
+        case 'collect': [1047, 1319, 1568, 2093, 2637].forEach((f, i) => this.tone(f, .2, 'sine', .05, i * .06)); break;
+        case 'door': this.tone(98, 1.4, 'sawtooth', .025, 0, 65); this.noise(1.3, .035, 0, 300); [392, 523, 659, 784, 1047, 1319].forEach((f, i) => this.tone(f, .7, 'triangle', .055, .6 + i * .12)); break;
+        case 'key': [1568, 2093, 2637, 3136].forEach((f, i) => this.tone(f, .5, 'sine', .045, i * .1)); break;
+        case 'shake': for (let i = 0; i < 7; i++) this.tone(220 + i * 25, .06, 'square', .02, i * .12); break;
+        case 'pop': this.noise(.3, .06, 0, 1800); this.tone(660, .25, 'triangle', .06, 0, 1600); break;
+        case 'fanfare': [523, 659, 784].forEach((f, i) => this.tone(f, .22, 'triangle', .08, i * .13)); [523, 659, 784, 1047].forEach(f => this.tone(f, 1.1, 'triangle', .045, .42)); break;
+        case 'whoosh': this.noise(.55, .045, 0, 700); break;
+        case 'boom': this.noise(.5, .05, 0, 500); this.tone(180, .4, 'sine', .04, 0, 60); break;
+        case 'tick': this.tone(700, .05, 'square', .025); break;
+      }
+    } catch(e){}
+  }
+};
+
+/* ============================================================
+   5. 中文朗读（SpeechSynthesis，优雅降级）
+   ============================================================ */
+function speak(text){
+  if (!('speechSynthesis' in window) || typeof SpeechSynthesisUtterance === 'undefined'){
+    toast('这个浏览器不支持语音朗读，请看拼音来练习吧～'); return;
+  }
+  try {
+    speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang = 'zh-CN'; u.rate = .78; u.pitch = 1.05;
+    const voices = speechSynthesis.getVoices();
+    const v = voices.find(v => /zh[-_]CN/i.test(v.lang)) || voices.find(v => /^zh/i.test(v.lang) || /cmn/i.test(v.lang));
+    if (v) u.voice = v;
+    else if (voices.length) toast('没有找到中文语音包，发音可能不准确，请参考拼音');
+    speechSynthesis.speak(u);
+  } catch(e){ toast('朗读暂时不可用，请参考拼音'); }
+}
+if ('speechSynthesis' in window) { try { speechSynthesis.getVoices(); speechSynthesis.onvoiceschanged = () => speechSynthesis.getVoices(); } catch(e){} }
+
+/* ============================================================
+   6. 粒子特效（背景氛围 + 爆发特效）
+   ============================================================ */
+const FX = (() => {
+  const back = $('#fxBack'), front = $('#fxFront'), cb = back.getContext('2d'), cf = front.getContext('2d');
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let W = 0, H = 0, mode = null; const P = [];
+  function resize(){
+    const dpr = Math.min(window.devicePixelRatio || 1, 2); W = innerWidth; H = innerHeight;
+    [back, front].forEach(c => { c.width = W * dpr; c.height = H * dpr; c.style.width = W + 'px'; c.style.height = H + 'px'; });
+    cb.setTransform(dpr, 0, 0, dpr, 0, 0); cf.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+  addEventListener('resize', resize); resize();
+  const pick = a => a[Math.floor(Math.random() * a.length)];
+  function add(p){ P.push(Object.assign({ x:0, y:0, vx:0, vy:0, g:0, life:0, max:60, size:4, color:'#ffd45c', type:'star', rot:0, vr:0, drag:.98, layer:'front' }, p)); }
+  function burst(x, y, o = {}){
+    const n = reduce ? Math.ceil((o.count || 30) / 4) : (o.count || 30);
+    for (let i = 0; i < n; i++){
+      const a = Math.random() * Math.PI * 2, s = (o.speed || 5) * (.35 + Math.random() * .85);
+      add({ x, y, vx:Math.cos(a) * s, vy:Math.sin(a) * s - (o.up || 0), g:o.gravity ?? .08, max:(o.life || 60) + Math.random() * 30,
+        size:(o.size || 5) * (.6 + Math.random() * .8), color:pick(o.colors || ['#ffd45c', '#ff8c1a', '#ffffff', '#c9a0ff']), type:o.type || 'star', vr:(Math.random() - .5) * .3, drag:o.drag || .96 });
+    }
+  }
+  function burstAt(el, o){ if (!el) return; const r = el.getBoundingClientRect(); burst(r.left + r.width / 2, r.top + r.height / 2, o); }
+  function confetti(n = 140){
+    const cnt = reduce ? 20 : n;
+    for (let i = 0; i < cnt; i++) add({ x:Math.random() * W, y:-20 - Math.random() * H * .4, vx:(Math.random() - .5) * 3, vy:2 + Math.random() * 3, g:.04, max:260 + Math.random() * 120,
+      size:6 + Math.random() * 6, type:'confetti', color:pick(['#ffd45c', '#ff8c1a', '#b996f0', '#5fe0a0', '#ff7a8a', '#7fd6ff']), vr:(Math.random() - .5) * .3, drag:.995 });
+  }
+  function fireworks(n = 6){
+    for (let i = 0; i < n; i++) setTimeout(() => {
+      const x = W * (.15 + Math.random() * .7), y = H * (.15 + Math.random() * .35);
+      burst(x, y, { count:70, speed:7, gravity:.05, type:'spark', life:70, drag:.965, colors:pick([['#ffd45c', '#fff2b0', '#ff8c1a'], ['#c9a0ff', '#ffffff', '#7fd6ff'], ['#5fe0a0', '#ffd45c', '#ffffff'], ['#ff7a8a', '#ffd45c', '#ffffff']]) });
+      Sound.play('boom');
+    }, i * 380);
+  }
+  function setAmbient(m){ mode = m; for (let i = P.length - 1; i >= 0; i--) if (P[i].layer === 'back') P.splice(i, 1); }
+  function spawnAmbient(){
+    if (!mode || reduce) return;
+    let count = 0; for (const p of P) if (p.layer === 'back') count++;
+    const target = { dust:45, sparkle:55, firefly:40, stars:30 }[mode] || 0;
+    if (count >= target || Math.random() > .3) return;
+    if (mode === 'dust') add({ layer:'back', type:'dot', x:Math.random() * W, y:H + 10, vx:(Math.random() - .5) * .3, vy:-.25 - Math.random() * .45, max:500 + Math.random() * 300, size:1.2 + Math.random() * 2, color:pick(['#ffcf8a', '#ffe9b0', '#d6b8ff']), drag:1 });
+    if (mode === 'sparkle') add({ layer:'back', type:'star', x:Math.random() * W, y:H * (.3 + Math.random() * .8), vx:(Math.random() - .5) * .3, vy:-.3 - Math.random() * .6, max:300 + Math.random() * 200, size:2 + Math.random() * 4, color:pick(['#ffd45c', '#c9a0ff', '#ffffff', '#7fd6ff']), vr:.02, drag:1 });
+    if (mode === 'firefly') add({ layer:'back', type:'glow', x:Math.random() * W, y:H * (.35 + Math.random() * .6), vx:(Math.random() - .5) * .6, vy:(Math.random() - .5) * .6, max:400 + Math.random() * 400, size:2 + Math.random() * 2.5, color:pick(['#e8ff7a', '#fff2a0', '#b8ff9a']), drag:1 });
+    if (mode === 'stars') add({ layer:'back', type:'star', x:Math.random() * W, y:Math.random() * H, max:200 + Math.random() * 200, size:2 + Math.random() * 3, color:pick(['#ffd45c', '#ffffff', '#c9a0ff']), vr:.03, drag:1 });
+  }
+  function drawStar(c, r){ c.beginPath(); for (let i = 0; i < 8; i++){ const rr = i % 2 ? r * .38 : r, a = i * Math.PI / 4; c.lineTo(Math.cos(a) * rr, Math.sin(a) * rr); } c.closePath(); c.fill(); }
+  function loop(){
+    requestAnimationFrame(loop);
+    spawnAmbient();
+    cb.clearRect(0, 0, W, H); cf.clearRect(0, 0, W, H);
+    for (let i = P.length - 1; i >= 0; i--){
+      const p = P[i];
+      p.vx *= p.drag; p.vy *= p.drag; p.vy += p.g;
+      if (p.type === 'glow'){ p.vx += (Math.random() - .5) * .06; p.vy += (Math.random() - .5) * .06; p.vx = Math.max(-.8, Math.min(.8, p.vx)); p.vy = Math.max(-.8, Math.min(.8, p.vy)); }
+      p.x += p.vx; p.y += p.vy; p.rot += p.vr; p.life++;
+      if (p.life > p.max || p.y > H + 60){ P.splice(i, 1); continue; }
+      const c = p.layer === 'back' ? cb : cf;
+      const a = Math.max(0, Math.min(1, p.life / 12, (p.max - p.life) / 30));
+      c.save(); c.globalAlpha = a; c.translate(p.x, p.y); c.rotate(p.rot); c.fillStyle = p.color;
+      if (p.type === 'confetti'){ c.fillRect(-p.size / 2, -p.size / 4, p.size, p.size / 2); }
+      else if (p.type === 'star'){ drawStar(c, p.size); }
+      else if (p.type === 'glow'){ const tw = .55 + .45 * Math.sin(p.life * .08); c.globalAlpha = a * tw; const g = c.createRadialGradient(0, 0, 0, 0, 0, p.size * 5); g.addColorStop(0, p.color); g.addColorStop(.3, p.color + '88'); g.addColorStop(1, p.color + '00'); c.fillStyle = g; c.beginPath(); c.arc(0, 0, p.size * 5, 0, Math.PI * 2); c.fill(); }
+      else if (p.type === 'spark'){ c.beginPath(); c.arc(0, 0, p.size * .6, 0, Math.PI * 2); c.fill(); c.globalAlpha = a * .35; c.beginPath(); c.arc(0, 0, p.size * 1.6, 0, Math.PI * 2); c.fill(); }
+      else { c.beginPath(); c.arc(0, 0, p.size, 0, Math.PI * 2); c.fill(); }
+      c.restore();
+    }
+  }
+  loop();
+  return { burst, burstAt, confetti, fireworks, setAmbient };
+})();
+
+/* ============================================================
+   7. 卡通插画（全部内联 SVG，无需外部图片）
+   ============================================================ */
+let _uid = 0; const uid = p => p + (++_uid);
+function starPts(cx, cy, R, r, n = 5){ const pts = []; for (let i = 0; i < n * 2; i++){ const a = -Math.PI / 2 + i * Math.PI / n, rr = i % 2 ? r : R; pts.push((cx + Math.cos(a) * rr).toFixed(1) + ',' + (cy + Math.sin(a) * rr).toFixed(1)); } return pts.join(' '); }
+function sparkle(x, y, s, c){ return `<path d="M${x} ${y - s} Q${x + s * .18} ${y - s * .18} ${x + s} ${y} Q${x + s * .18} ${y + s * .18} ${x} ${y + s} Q${x - s * .18} ${y + s * .18} ${x - s} ${y} Q${x - s * .18} ${y - s * .18} ${x} ${y - s}Z" fill="${c}"/>`; }
+
+function pumpkinSVG(style = 'happy'){
+  const id = uid('pk');
+  const pal = { glow:['#fff4b0', '#ffc23a', '#f07a10'], ghost:['#ffffff', '#ebe4ff', '#b9a8e0'], gold:['#fff6c0', '#f7c948', '#b8860b'] };
+  const c = pal[style] || ['#ffc25a', '#f7891f', '#c4500e'];
+  const featLight = style === 'ghost' ? null : style === 'gold' ? '#8a5200' : null;
+  const F = featLight || `url(#${id}f)`;
+  const D = style === 'ghost' ? '#3b2a5c' : '#5a2400';
+  let s = `<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg"><defs>
+    <radialGradient id="${id}b" cx="38%" cy="32%" r="75%"><stop offset="0" stop-color="${c[0]}"/><stop offset=".55" stop-color="${c[1]}"/><stop offset="1" stop-color="${c[2]}"/></radialGradient>
+    <radialGradient id="${id}f" cx="50%" cy="40%" r="65%"><stop offset="0" stop-color="#fffbe0"/><stop offset=".6" stop-color="#ffe066"/><stop offset="1" stop-color="#ffb020"/></radialGradient></defs>`;
+  if (style === 'glow' || style === 'gold') s += `<ellipse cx="60" cy="72" rx="62" ry="52" fill="#ffd45c" opacity=".28"/>`;
+  if (style === 'magic') s += `<ellipse cx="60" cy="72" rx="62" ry="52" fill="#b07cff" opacity=".28"/>`;
+  s += `<path d="M57 32 C55 22 59 14 67 9 L71 14 C66 17 63 23 64 33 Z" fill="#4f7a2a"/><path d="M66 24 C76 14 88 18 90 26 C82 23 74 25 68 30Z" fill="#6fae3a"/>`;
+  s += `<ellipse cx="33" cy="74" rx="25" ry="36" fill="url(#${id}b)"/><ellipse cx="87" cy="74" rx="25" ry="36" fill="url(#${id}b)"/><ellipse cx="47" cy="73" rx="25" ry="39" fill="url(#${id}b)"/><ellipse cx="73" cy="73" rx="25" ry="39" fill="url(#${id}b)"/><ellipse cx="60" cy="73" rx="22" ry="40" fill="url(#${id}b)"/>`;
+  s += `<path d="M46 37 Q35 73 46 111 M74 37 Q85 73 74 111" stroke="${c[2]}" stroke-width="2" fill="none" opacity=".45"/><ellipse cx="40" cy="54" rx="6" ry="11" fill="#fff" opacity=".28"/>`;
+  const eyesTri = `<path d="M37 68 L46 52 L55 68Z" fill="${F}"/><path d="M65 68 L74 52 L83 68Z" fill="${F}"/>`;
+  const nose = `<path d="M56 77 L60 71 L64 77Z" fill="${F}"/>`;
+  const smile = `<path d="M33 81 Q60 108 87 81 Q81 85 75 83 L71 90 L65 85 L55 85 L49 90 L45 83 Q39 85 33 81Z" fill="${F}"/>`;
+  switch (style){
+    case 'naughty':
+      s += `<path d="M37 68 L46 52 L55 68Z" fill="${F}"/><path d="M64 63 Q74 54 84 63" stroke="${F}" stroke-width="5" fill="none" stroke-linecap="round"/>${nose}<path d="M35 82 Q60 104 85 82 Q60 93 35 82Z" fill="${F}"/><path d="M63 89 Q71 106 79 90 Q71 92 63 89Z" fill="#ff7aa2"/>`; break;
+    case 'magic':
+      s += `<polygon points="${starPts(46, 62, 10, 4.5)}" fill="${F}"/><polygon points="${starPts(74, 62, 10, 4.5)}" fill="${F}"/>${smile}${sparkle(16, 42, 7, '#d6b4ff')}${sparkle(104, 36, 8, '#ffe066')}${sparkle(102, 100, 6, '#d6b4ff')}${sparkle(14, 96, 5, '#ffe066')}`; break;
+    case 'sleepy':
+      s += `<path d="M37 64 Q46 72 55 64" stroke="${D}" stroke-width="4" fill="none" stroke-linecap="round"/><path d="M65 64 Q74 72 83 64" stroke="${D}" stroke-width="4" fill="none" stroke-linecap="round"/><ellipse cx="60" cy="88" rx="6" ry="7" fill="${D}"/><text x="88" y="38" font-size="18" font-weight="800" fill="#e8e0ff" font-family="Arial">Z</text><text x="101" y="24" font-size="12" font-weight="800" fill="#e8e0ff" font-family="Arial">z</text>`; break;
+    case 'angry':
+      s += `<path d="M34 52 L55 60" stroke="${D}" stroke-width="5" stroke-linecap="round"/><path d="M86 52 L65 60" stroke="${D}" stroke-width="5" stroke-linecap="round"/><path d="M38 70 L55 62 L53 73Z" fill="${F}"/><path d="M82 70 L65 62 L67 73Z" fill="${F}"/><path d="M40 96 Q60 78 80 96 L74 93 L68 97 L60 91 L52 97 L46 93Z" fill="${F}"/><ellipse cx="30" cy="84" rx="7" ry="5" fill="#ff4a4a" opacity=".35"/><ellipse cx="90" cy="84" rx="7" ry="5" fill="#ff4a4a" opacity=".35"/>`; break;
+    case 'glow':
+      s += `<ellipse cx="46" cy="62" rx="8" ry="10" fill="${F}"/><ellipse cx="74" cy="62" rx="8" ry="10" fill="${F}"/><path d="M38 80 Q60 110 82 80Z" fill="${F}"/>`; break;
+    case 'ghost':
+      s += `<ellipse cx="46" cy="64" rx="7" ry="10" fill="${D}"/><ellipse cx="74" cy="64" rx="7" ry="10" fill="${D}"/><circle cx="48" cy="61" r="2.4" fill="#fff"/><circle cx="76" cy="61" r="2.4" fill="#fff"/><ellipse cx="60" cy="89" rx="7" ry="9" fill="${D}"/><ellipse cx="34" cy="80" rx="7" ry="4" fill="#ffaac4"/><ellipse cx="86" cy="80" rx="7" ry="4" fill="#ffaac4"/>`; break;
+    case 'gold':
+      s += eyesTri + nose + smile + `<path d="M42 36 L47 16 L56 29 L60 12 L64 29 L73 16 L78 36Z" fill="#ffe680" stroke="#b8860b" stroke-width="2"/><circle cx="60" cy="12" r="3" fill="#ff7a8a"/>${sparkle(14, 50, 7, '#fff6c0')}${sparkle(106, 58, 6, '#fff6c0')}${sparkle(100, 104, 5, '#fff')}`; break;
+    case 'hat':
+      s += eyesTri + nose + smile + `<path d="M22 42 Q60 30 98 42 Q102 49 92 48 Q60 40 28 48 Q18 49 22 42Z" fill="#3b1f66"/><path d="M34 42 Q48 34 58 6 Q63 -1 74 5 Q66 9 68 18 Q74 34 86 42 Q60 35 34 42Z" fill="#5a2e94"/><path d="M36 41 Q60 33 84 41 L83 46 Q60 38 37 46Z" fill="#ff8c1a"/><rect x="55" y="36" width="10" height="9" rx="2" fill="#ffd45c"/>`; break;
+    default:
+      s += eyesTri + nose + smile;
+  }
+  return s + '</svg>';
+}
+
+function witchSVG(riding = false){
+  const id = uid('wi');
+  return `<svg viewBox="0 0 150 200" xmlns="http://www.w3.org/2000/svg"><defs>
+    <linearGradient id="${id}h" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7a48c8"/><stop offset="1" stop-color="#3b1f66"/></linearGradient>
+    <linearGradient id="${id}d" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7a48c8"/><stop offset="1" stop-color="#4b2a7a"/></linearGradient></defs>
+    ${riding ? `<g><line x1="4" y1="176" x2="128" y2="160" stroke="#8a5a2b" stroke-width="7" stroke-linecap="round"/><path d="M118 152 L150 140 L146 160 L150 180 L120 170Z" fill="#e6b84a"/><path d="M118 152 L124 172" stroke="#c0392b" stroke-width="6"/></g>` : ''}
+    <path d="M42 74 Q30 118 46 138 L104 138 Q120 118 108 74Z" fill="#ff8a3d"/>
+    ${riding ? '' : `<rect x="56" y="176" width="10" height="16" fill="#ff8c1a"/><rect x="56" y="181" width="10" height="5" fill="#4b2a7a"/><rect x="84" y="176" width="10" height="16" fill="#ff8c1a"/><rect x="84" y="181" width="10" height="5" fill="#4b2a7a"/><ellipse cx="58" cy="194" rx="10" ry="5" fill="#2a1840"/><ellipse cx="92" cy="194" rx="10" ry="5" fill="#2a1840"/>`}
+    <path d="M54 116 L30 ${riding ? 172 : 182} Q75 ${riding ? 186 : 194} 120 ${riding ? 168 : 182} L96 116Z" fill="url(#${id}d)"/>
+    <path d="M60 118 L75 150 L90 118Z" fill="#ff8c1a" opacity=".85"/>
+    <path d="M52 124 Q36 138 40 152" stroke="#5a2e94" stroke-width="10" stroke-linecap="round" fill="none"/><circle cx="40" cy="154" r="6" fill="#ffd9b8"/>
+    <circle cx="75" cy="88" r="27" fill="#ffd9b8"/>
+    <ellipse cx="65" cy="88" rx="4" ry="5" fill="#2a1840"/><ellipse cx="85" cy="88" rx="4" ry="5" fill="#2a1840"/><circle cx="66.3" cy="86.3" r="1.5" fill="#fff"/><circle cx="86.3" cy="86.3" r="1.5" fill="#fff"/>
+    <ellipse cx="59" cy="98" rx="5.5" ry="3.2" fill="#ff9aa8" opacity=".8"/><ellipse cx="91" cy="98" rx="5.5" ry="3.2" fill="#ff9aa8" opacity=".8"/>
+    <path d="M67 101 Q75 109 83 101" stroke="#8a2a3a" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+    <path d="M47 80 Q58 62 75 70 Q92 62 103 80 Q97 64 75 60 Q53 62 47 80Z" fill="#ff8a3d"/>
+    <ellipse cx="75" cy="64" rx="50" ry="10" fill="#3b1f66"/>
+    <path d="M47 62 Q66 52 103 62 Q92 42 88 20 Q84 6 108 2 Q82 -2 75 14 Q64 36 47 62Z" fill="url(#${id}h)"/>
+    <path d="M50 57 Q75 49 100 57 L101 63 Q75 55 49 63Z" fill="#ff8c1a"/><rect x="70" y="52" width="11" height="9" rx="2" fill="#ffd45c"/>
+    <polygon points="${starPts(90, 34, 5, 2.2)}" fill="#ffd45c"/>
+    <g class="wand-arm"><path d="M98 124 Q114 116 118 102" stroke="#5a2e94" stroke-width="10" stroke-linecap="round" fill="none"/><circle cx="118" cy="100" r="6" fill="#ffd9b8"/>
+      <line x1="118" y1="100" x2="132" y2="66" stroke="#6a3a1a" stroke-width="3.5" stroke-linecap="round"/><polygon points="${starPts(133, 61, 10, 4.2)}" fill="#ffd45c" stroke="#fff3b0" stroke-width="1.5"/>
+      ${sparkle(144, 48, 4, '#fff')}${sparkle(122, 50, 3, '#ffe066')}</g>
+  </svg>`;
+}
+
+function broomSVG(){
+  const id = uid('br');
+  return `<svg viewBox="0 0 100 170" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="${id}s" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffe08a"/><stop offset="1" stop-color="#d9a032"/></linearGradient></defs>
+    <line x1="80" y1="6" x2="36" y2="114" stroke="#8a5a2b" stroke-width="8" stroke-linecap="round"/><line x1="78" y1="10" x2="40" y2="104" stroke="#b07a40" stroke-width="2.5" stroke-linecap="round"/>
+    <path d="M27 108 L50 117 Q62 140 46 166 Q38 156 30 166 Q26 152 16 162 Q18 146 6 150 Q18 132 27 108Z" fill="url(#${id}s)"/>
+    <path d="M30 120 L20 150 M37 122 L32 158 M44 124 L44 156 M50 122 L54 146" stroke="#b07a20" stroke-width="1.8" opacity=".7"/>
+    <path d="M28 104 L52 113 L48 123 L24 114Z" fill="#c0392b"/><path d="M27 108 L50 117" stroke="#ff7a6a" stroke-width="2"/>
+    ${sparkle(86, 38, 6, '#ffe066')}${sparkle(16, 76, 5, '#d6b4ff')}${sparkle(72, 96, 4, '#fff')}
+  </svg>`;
+}
+
+function candleSVG(blue = false){
+  const id = uid('cd');
+  const fl = blue ? ['#2a6bff', '#5fd0ff', '#eafcff'] : ['#ff6a10', '#ffcf40', '#fff7c0'];
+  const gl = blue ? '#7fd6ff' : '#ffd45c';
+  return `<svg viewBox="0 0 80 150" xmlns="http://www.w3.org/2000/svg"><defs>
+    <radialGradient id="${id}g"><stop offset="0" stop-color="${gl}" stop-opacity=".75"/><stop offset="1" stop-color="${gl}" stop-opacity="0"/></radialGradient>
+    <linearGradient id="${id}f" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="${fl[0]}"/><stop offset=".55" stop-color="${fl[1]}"/><stop offset="1" stop-color="${fl[2]}"/></linearGradient>
+    <linearGradient id="${id}w" x1="0" x2="1"><stop offset="0" stop-color="#fff6dc"/><stop offset=".5" stop-color="#ffe9b8"/><stop offset="1" stop-color="#e2c088"/></linearGradient></defs>
+    <circle cx="40" cy="36" r="38" fill="url(#${id}g)"/>
+    <g class="flame"><path d="M40 4 Q54 26 49 41 Q45 52 40 52 Q35 52 31 41 Q26 26 40 4Z" fill="url(#${id}f)"/><path d="M40 24 Q46 37 43.5 45 Q40 50 36.5 45 Q34 37 40 24Z" fill="#fff" opacity=".75"/></g>
+    <line x1="40" y1="51" x2="40" y2="60" stroke="#3a2a1a" stroke-width="2.6"/>
+    <rect x="25" y="58" width="30" height="72" rx="6" fill="url(#${id}w)"/>
+    <path d="M25 64 Q25 58 31 58 L49 58 Q55 58 55 64 L55 74 Q52 79 50 72 L49 67 Q45 67 45 77 Q43 86 41 76 L39 67 Q33 67 31 72 Q28 77 25 72Z" fill="#fffbec"/>
+    <ellipse cx="40" cy="134" rx="33" ry="9" fill="#a8761e"/><ellipse cx="40" cy="130" rx="31" ry="7.5" fill="#e0b450"/>
+    <path d="M70 130 Q82 124 77 115 Q72 108 65 115" stroke="#b8862e" stroke-width="4.5" fill="none"/>
+  </svg>`;
+}
+
+function batSVG(){
+  return `<svg viewBox="0 0 160 110" xmlns="http://www.w3.org/2000/svg">
+    <g class="wing wing-l"><path d="M70 50 Q40 18 4 30 Q17 42 13 57 Q28 52 34 65 Q44 56 52 67 Q58 56 70 61Z" fill="#4a2a6e"/><path d="M70 52 Q44 32 13 35 M58 52 L36 62 M64 56 L50 66" stroke="#2a1640" stroke-width="2" fill="none"/></g>
+    <g class="wing wing-r"><path d="M90 50 Q120 18 156 30 Q143 42 147 57 Q132 52 126 65 Q116 56 108 67 Q102 56 90 61Z" fill="#4a2a6e"/><path d="M90 52 Q116 32 147 35 M102 52 L124 62 M96 56 L110 66" stroke="#2a1640" stroke-width="2" fill="none"/></g>
+    <ellipse cx="80" cy="64" rx="18" ry="22" fill="#3a2258"/><ellipse cx="80" cy="68" rx="10" ry="13" fill="#5a3a80"/>
+    <path d="M63 32 L60 10 L74 26Z" fill="#4a2a6e"/><path d="M97 32 L100 10 L86 26Z" fill="#4a2a6e"/><path d="M64 28 L63 16 L70 25Z" fill="#ff9ac0"/><path d="M96 28 L97 16 L90 25Z" fill="#ff9ac0"/>
+    <circle cx="80" cy="42" r="20" fill="#4a2a6e"/>
+    <circle cx="72" cy="41" r="7.5" fill="#fff"/><circle cx="88" cy="41" r="7.5" fill="#fff"/><circle cx="73" cy="42" r="4" fill="#1a1028"/><circle cx="87" cy="42" r="4" fill="#1a1028"/><circle cx="74.3" cy="40.5" r="1.4" fill="#fff"/><circle cx="88.3" cy="40.5" r="1.4" fill="#fff"/>
+    <ellipse cx="66" cy="50" rx="4" ry="2.4" fill="#ff8ab0" opacity=".8"/><ellipse cx="94" cy="50" rx="4" ry="2.4" fill="#ff8ab0" opacity=".8"/>
+    <path d="M74 52 Q80 57 86 52" stroke="#1a1028" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M76.5 53.5 L78 57 L79.5 54.3Z M80.5 54.3 L82 57 L83.5 53.5Z" fill="#fff"/>
+  </svg>`;
+}
+
+function ghostSVG(){
+  const id = uid('gh');
+  return `<svg viewBox="0 0 120 140" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="${id}g" cx="40%" cy="30%" r="80%"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#d9d2f5"/></radialGradient></defs>
+    <ellipse cx="60" cy="136" rx="30" ry="4" fill="#000" opacity=".15"/>
+    <path d="M22 72 Q4 78 9 96 Q17 86 24 87Z" fill="url(#${id}g)"/><path d="M98 72 Q116 78 111 96 Q103 86 96 87Z" fill="url(#${id}g)"/>
+    <path d="M20 64 Q20 12 60 12 Q100 12 100 64 L100 116 Q93 128 84 118 Q76 108 68 120 Q60 130 52 120 Q44 108 36 118 Q27 128 20 116Z" fill="url(#${id}g)"/>
+    <ellipse cx="47" cy="56" rx="7" ry="10" fill="#2a1840"/><ellipse cx="73" cy="56" rx="7" ry="10" fill="#2a1840"/><circle cx="49" cy="52" r="2.6" fill="#fff"/><circle cx="75" cy="52" r="2.6" fill="#fff"/>
+    <ellipse cx="37" cy="72" rx="7" ry="4" fill="#ffaac4" opacity=".85"/><ellipse cx="83" cy="72" rx="7" ry="4" fill="#ffaac4" opacity=".85"/>
+    <ellipse cx="60" cy="76" rx="6" ry="7" fill="#2a1840"/><ellipse cx="60" cy="79" rx="3.5" ry="3" fill="#ff8ab0"/>
+  </svg>`;
+}
+
+function doorLeafSVG(){
+  const id = uid('dr');
+  const sym = (x, y, inner) => `<circle cx="${x}" cy="${y}" r="15" fill="url(#${id}b)" stroke="#7a5a20" stroke-width="2"/>${inner}`;
+  return `<svg viewBox="0 0 200 300" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><defs>
+    <linearGradient id="${id}w" x1="0" x2="1"><stop offset="0" stop-color="#6a3a1c"/><stop offset=".5" stop-color="#8a5228"/><stop offset="1" stop-color="#5a3016"/></linearGradient>
+    <radialGradient id="${id}m" cx="40%" cy="35%"><stop offset="0" stop-color="#c8c0d0"/><stop offset="1" stop-color="#6a6278"/></radialGradient>
+    <radialGradient id="${id}b" cx="40%" cy="35%"><stop offset="0" stop-color="#ffe8a0"/><stop offset="1" stop-color="#c8962e"/></radialGradient>
+    <clipPath id="${id}c"><path d="M0 300 L0 100 A100 100 0 0 1 200 100 L200 300Z"/></clipPath></defs>
+    <g clip-path="url(#${id}c)">
+      <rect width="200" height="300" fill="url(#${id}w)"/>
+      <path d="M40 0 V300 M80 0 V300 M120 0 V300 M160 0 V300" stroke="#3a1e0c" stroke-width="3" opacity=".55"/>
+      <rect y="78" width="200" height="14" fill="#2b2630"/><rect y="250" width="200" height="14" fill="#2b2630"/>
+      ${[20, 60, 100, 140, 180].map(x => `<circle cx="${x}" cy="85" r="3" fill="#7a7088"/><circle cx="${x}" cy="257" r="3" fill="#7a7088"/>`).join('')}
+    </g>
+    <circle cx="100" cy="170" r="56" fill="url(#${id}m)" stroke="#3a3044" stroke-width="5"/>
+    <circle cx="100" cy="170" r="44" fill="none" stroke="#5a5068" stroke-width="2" stroke-dasharray="4 5"/>
+    ${sym(100, 136, `<path d="M106 128 A9 9 0 1 0 106 144 A7 7 0 1 1 106 128Z" fill="#3a2410"/>`)}
+    ${sym(66, 170, `<path d="M56 168 Q60 162 63 166 L66 162 L69 166 Q72 162 76 168 Q72 170 70 174 Q66 170 62 174 Q60 170 56 168Z" fill="#3a2410"/>`)}
+    ${sym(134, 170, `<polygon points="${starPts(134, 170.5, 9, 3.8)}" fill="#3a2410"/>`)}
+    ${sym(100, 204, `<ellipse cx="100" cy="206" rx="9" ry="7" fill="#3a2410"/><rect x="99" y="196" width="2.5" height="4" fill="#3a2410"/>`)}
+    <circle cx="100" cy="170" r="13" fill="url(#${id}b)" stroke="#7a5a20" stroke-width="2"/><circle cx="100" cy="167" r="3.6" fill="#1a1020"/><path d="M98 168 L102 168 L103.5 176 L96.5 176Z" fill="#1a1020"/>
+    <circle cx="176" cy="190" r="7" fill="none" stroke="#2b2630" stroke-width="3.5"/>
+  </svg>`;
+}
+
+function keySVG(){
+  const id = uid('ky');
+  return `<svg class="key-svg" viewBox="0 0 160 70" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="${id}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff3b0"/><stop offset=".5" stop-color="#ffd45c"/><stop offset="1" stop-color="#c8962e"/></linearGradient></defs>
+    <circle cx="32" cy="35" r="24" fill="none" stroke="url(#${id})" stroke-width="11"/><circle cx="32" cy="35" r="8" fill="url(#${id})"/>
+    <rect x="54" y="29" width="96" height="12" rx="5" fill="url(#${id})"/><rect x="118" y="38" width="10" height="20" rx="2" fill="url(#${id})"/><rect x="134" y="38" width="10" height="14" rx="2" fill="url(#${id})"/>
+    ${sparkle(10, 8, 6, '#fff')}${sparkle(150, 12, 5, '#fff')}</svg>`;
+}
+
+function castleSVG(){
+  const win = (x, y) => `<rect x="${x}" y="${y}" width="10" height="16" rx="5" fill="#ffd45c" class="glowpulse"/>`;
+  return `<svg class="castle" viewBox="0 0 1200 520" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 520 L0 360 Q200 300 420 340 Q600 270 820 330 Q1000 290 1200 340 L1200 520Z" fill="#1d1250"/>
+    <g fill="#140b3a">
+      <rect x="470" y="200" width="260" height="190"/><rect x="430" y="140" width="70" height="250"/><rect x="700" y="140" width="70" height="250"/><rect x="560" y="80" width="80" height="140"/>
+      <polygon points="420,145 465,40 510,145"/><polygon points="690,145 735,40 780,145"/><polygon points="550,85 600,-10 650,85"/>
+      <rect x="350" y="250" width="60" height="140"/><polygon points="342,255 380,180 418,255"/><rect x="790" y="240" width="60" height="150"/><polygon points="782,245 820,170 858,245"/>
+      ${[470, 500, 530, 560, 590, 620, 650, 680, 710].map(x => `<rect x="${x}" y="190" width="18" height="14"/>`).join('')}
+      <path d="M560 390 L560 330 A40 40 0 0 1 640 330 L640 390Z" fill="#0a0626"/>
+    </g>
+    <path d="M465 40 L465 14 L490 22 L465 30" fill="#ff8c1a"/><path d="M600 -10 L600 -36 L626 -28 L600 -20" fill="#ff8c1a"/>
+    ${win(455, 190)}${win(725, 190)}${win(595, 120)}${win(375, 290)}${win(815, 280)}${win(520, 260)}${win(670, 260)}${win(455, 290)}${win(725, 300)}
+    <path d="M0 520 L0 430 Q300 380 600 420 Q900 380 1200 430 L1200 520Z" fill="#0d0830"/>
+    <g transform="translate(150,400)">${'' }</g>
+  </svg>`;
+}
+
+function cottageSVG(){
+  return `<svg viewBox="0 0 200 190" xmlns="http://www.w3.org/2000/svg">
+    <rect x="128" y="26" width="18" height="40" fill="#3a2a3a"/>
+    <path d="M14 92 L100 22 L186 92Z" fill="#5a2e94"/><path d="M14 92 L100 22 L186 92" stroke="#3b1f66" stroke-width="8" fill="none" stroke-linejoin="round"/>
+    <rect x="34" y="88" width="132" height="92" fill="#7a4a3a"/><path d="M34 110 H166 M34 134 H166 M34 158 H166" stroke="#5a3428" stroke-width="2"/>
+    <circle cx="100" cy="64" r="13" fill="#ffd45c" class="glowpulse"/><path d="M100 51 V77 M87 64 H113" stroke="#5a2e94" stroke-width="3"/>
+    <rect x="50" y="110" width="30" height="30" rx="4" fill="#ffcf5a" class="glowpulse"/><path d="M65 110 V140 M50 125 H80" stroke="#7a4a3a" stroke-width="3"/>
+    <path d="M112 180 V132 A18 18 0 0 1 148 132 V180Z" fill="#3a1e14"/><circle cx="142" cy="156" r="2.5" fill="#ffd45c"/>
+  </svg>`;
+}
+
+/* 房间背景（16:9 大插画） */
+function roomBgSVG(){
+  const flags = [];
+  for (let i = 0; i < 13; i++){
+    const t = .04 + i * .076, x = (1 - t) ** 2 * 420 + 2 * (1 - t) * t * 800 + t * t * 1180, y = (1 - t) ** 2 * 76 + 2 * (1 - t) * t * 176 + t * t * 76;
+    const col = ['#ff8c1a', '#2a1640', '#ff8c1a', '#7a48c8'][i % 4];
+    let f = `<path d="M${x - 24} ${y} L${x + 24} ${y} L${x} ${y + 62}Z" fill="${col}"/>`;
+    if (i % 4 === 0 || i % 4 === 2) f += `<path d="M${x - 12} ${y + 14} L${x - 5} ${y + 8} L${x - 3} ${y + 17}Z M${x + 12} ${y + 14} L${x + 5} ${y + 8} L${x + 3} ${y + 17}Z M${x - 9} ${y + 26} Q${x} ${y + 36} ${x + 9} ${y + 26} Q${x} ${y + 30} ${x - 9} ${y + 26}Z" fill="#3a1600"/>`;
+    flags.push(f);
+  }
+  const floorLines = [];
+  for (let k = -9; k <= 9; k++){ const xt = 800 + k * 110, xb = 800 + k * 260; floorLines.push(`<line x1="${xt}" y1="700" x2="${xb}" y2="900"/>`); }
+  [728, 766, 818, 884].forEach(y => floorLines.push(`<line x1="0" y1="${y}" x2="1600" y2="${y}"/>`));
+  const books = []; const bc = ['#8a2a3a', '#2a5a8a', '#4a7a2a', '#9a6a2a', '#5a2a8a', '#b04a1a', '#2a7a6a'];
+  [[430, 455], [430, 555], [430, 655]].forEach(([x0, y]) => { let x = x0 + 4; let n = 0; while (x < 568){ const w = 14 + (n * 7 % 9), h = 52 + (n * 13 % 26); books.push(`<rect x="${x}" y="${y - h}" width="${w}" height="${h}" rx="2" fill="${bc[(n + y) % 7]}"/><rect x="${x + 2}" y="${y - h + 8}" width="${w - 4}" height="3" fill="#ffd45c" opacity=".6"/>`); x += w + 2; n++; if (y === 555 && x > 505) break; } });
+  const torch = x => `<g><ellipse cx="${x}" cy="300" rx="120" ry="140" fill="url(#rbWarm)" class="glowpulse"/><rect x="${x - 8}" y="320" width="16" height="44" rx="3" fill="#3a3040"/><path d="M${x - 18} 300 L${x + 18} 300 L${x + 10} 330 L${x - 10} 330Z" fill="#5a3a20"/>
+    <path class="flame" d="M${x} 236 Q${x + 26} 270 ${x + 16} 296 Q${x} 306 ${x - 16} 296 Q${x - 26} 270 ${x} 236Z" fill="#ff8c1a"/><path class="flame" d="M${x} 258 Q${x + 13} 280 ${x + 8} 294 Q${x} 300 ${x - 8} 294 Q${x - 13} 280 ${x} 258Z" fill="#ffe066"/></g>`;
+  const chCandle = (x, y) => `<rect x="${x - 6}" y="${y - 28}" width="12" height="28" rx="2" fill="#fff1d0"/><path class="flame" d="M${x} ${y - 46} Q${x + 8} ${y - 36} ${x + 4} ${y - 30} Q${x} ${y - 27} ${x - 4} ${y - 30} Q${x - 8} ${y - 36} ${x} ${y - 46}Z" fill="#ffcf40"/>`;
+  return `<svg class="room-bg" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <defs>
+    <pattern id="rbBricks" width="96" height="48" patternUnits="userSpaceOnUse"><rect width="96" height="48" fill="#2a1b4a"/><rect x="2" y="2" width="92" height="20" rx="4" fill="#3c2966"/><rect x="-46" y="26" width="92" height="20" rx="4" fill="#36255e"/><rect x="50" y="26" width="92" height="20" rx="4" fill="#402c6a"/></pattern>
+    <linearGradient id="rbFloor" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4a3346"/><stop offset="1" stop-color="#1e1320"/></linearGradient>
+    <radialGradient id="rbWarm"><stop offset="0" stop-color="#ffaa44" stop-opacity=".55"/><stop offset="1" stop-color="#ffaa44" stop-opacity="0"/></radialGradient>
+    <radialGradient id="rbCool"><stop offset="0" stop-color="#7f9bff" stop-opacity=".5"/><stop offset="1" stop-color="#7f9bff" stop-opacity="0"/></radialGradient>
+    <linearGradient id="rbSky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#16247e"/><stop offset="1" stop-color="#5b72e0"/></linearGradient>
+    <radialGradient id="rbMoon" cx="40%" cy="40%"><stop offset="0" stop-color="#fffdf0"/><stop offset=".8" stop-color="#e6ecff"/><stop offset="1" stop-color="#c9d3ff"/></radialGradient>
+    <radialGradient id="rbVig" cx="50%" cy="45%" r="72%"><stop offset=".55" stop-color="#0b0418" stop-opacity="0"/><stop offset="1" stop-color="#0b0418" stop-opacity=".7"/></radialGradient>
+    <linearGradient id="rbStone" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8e839c"/><stop offset="1" stop-color="#5a506a"/></linearGradient>
+    <linearGradient id="rbWood" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7a4a2a"/><stop offset="1" stop-color="#4a2a16"/></linearGradient>
+    <radialGradient id="rbRug" cx="50%" cy="50%"><stop offset="0" stop-color="#5a2470"/><stop offset="1" stop-color="#341448"/></radialGradient>
+    <clipPath id="rbWinClip"><path d="M80 470 L80 220 A130 130 0 0 1 340 220 L340 470Z"/></clipPath>
+  </defs>
+  <rect width="1600" height="900" fill="url(#rbBricks)"/>
+  <rect width="1600" height="900" fill="#1a0a30" opacity=".15"/>
+  <rect width="1600" height="48" fill="#22120b"/><rect y="48" width="1600" height="14" fill="#3a2214"/>
+  <path d="M120 0 L170 62 M520 0 L540 62 M1080 0 L1060 62 M1480 0 L1430 62" stroke="#3a2214" stroke-width="22"/>
+  <!-- 窗 -->
+  <ellipse cx="210" cy="320" rx="300" ry="300" fill="url(#rbCool)"/>
+  <g clip-path="url(#rbWinClip)">
+    <rect x="80" y="80" width="260" height="400" fill="url(#rbSky)"/>
+    ${[[110, 140], [300, 120], [150, 250], [320, 220], [260, 280], [100, 320]].map(([x, y]) => `<circle cx="${x}" cy="${y}" r="2" fill="#fff"/>`).join('')}
+    <circle cx="240" cy="200" r="72" fill="#dfe6ff" opacity=".22"/><circle cx="240" cy="200" r="50" fill="url(#rbMoon)"/>
+    <path d="M150 168 Q160 158 168 166 L176 158 L182 166 Q190 158 200 168 Q190 170 186 178 Q176 170 166 178 Q162 170 150 168Z" fill="#141038"/>
+    <path d="M80 480 L80 390 L112 390 L112 340 L102 340 L120 296 L138 340 L128 340 L128 390 L170 390 L170 310 L158 310 L184 252 L210 310 L198 310 L198 370 L250 370 L250 330 L240 330 L262 288 L284 330 L274 330 L274 410 L340 410 L340 480Z" fill="#141038"/>
+    <rect x="178" y="330" width="9" height="13" rx="4" fill="#ffcf5a"/><rect x="118" y="360" width="8" height="12" rx="4" fill="#ffcf5a"/><rect x="258" y="350" width="8" height="12" rx="4" fill="#ffcf5a"/>
+    <path d="M330 480 L322 380 L340 350 M324 410 L300 384" stroke="#141038" stroke-width="5" fill="none"/>
+  </g>
+  <path d="M80 470 L80 220 A130 130 0 0 1 340 220 L340 470Z" fill="none" stroke="#3b2416" stroke-width="16"/>
+  <line x1="210" y1="92" x2="210" y2="470" stroke="#3b2416" stroke-width="8"/><line x1="80" y1="300" x2="340" y2="300" stroke="#3b2416" stroke-width="8"/>
+  <rect x="58" y="466" width="304" height="22" rx="5" fill="#4a2c1a"/>
+  <path d="M38 76 Q72 64 100 78 L112 300 Q88 430 124 560 L56 560 Q28 300 38 76Z" fill="#8a1d36"/><path d="M60 90 Q70 300 80 550 M86 92 Q92 300 100 550" stroke="#5a0f22" stroke-width="5" fill="none" opacity=".6"/>
+  <path d="M382 76 Q348 64 320 78 L308 300 Q332 430 296 560 L364 560 Q392 300 382 76Z" fill="#8a1d36"/><path d="M360 90 Q350 300 340 550 M334 92 Q328 300 320 550" stroke="#5a0f22" stroke-width="5" fill="none" opacity=".6"/>
+  <rect x="18" y="62" width="384" height="16" rx="8" fill="#2a1a12"/><circle cx="18" cy="70" r="12" fill="#c8962e"/><circle cx="402" cy="70" r="12" fill="#c8962e"/>
+  <!-- 彩旗 -->
+  <path d="M420 76 Q800 176 1180 76" stroke="#2a1a12" stroke-width="4" fill="none"/>
+  ${flags.join('')}
+  <!-- 书架 -->
+  <g>
+    <rect x="420" y="330" width="160" height="370" fill="#4a2a16"/><rect x="428" y="338" width="144" height="354" fill="#2a1608"/>
+    <rect x="420" y="455" width="160" height="10" fill="#6a3e22"/><rect x="420" y="555" width="160" height="10" fill="#6a3e22"/><rect x="420" y="655" width="160" height="10" fill="#6a3e22"/><rect x="410" y="322" width="180" height="14" rx="3" fill="#6a3e22"/>
+    ${books.join('')}
+    <circle cx="530" cy="530" r="18" fill="#b04ae0" opacity=".85" class="glowpulse"/><rect x="525" y="500" width="10" height="14" fill="#cfd8e8"/>
+    <circle cx="555" cy="535" r="13" fill="#3ae07a" opacity=".85" class="glowpulse"/><rect x="551" y="512" width="8" height="12" fill="#cfd8e8"/>
+    <rect x="440" y="300" width="70" height="22" rx="3" fill="#2a5a8a"/><rect x="446" y="284" width="60" height="18" rx="3" fill="#8a2a3a"/>
+  </g>
+  <!-- 门框 -->
+  <path d="M630 700 L630 390 A170 170 0 0 1 970 390 L970 700Z" fill="url(#rbStone)"/>
+  <path d="M650 700 L650 390 A150 150 0 0 1 950 390" fill="none" stroke="#4a4058" stroke-width="4" stroke-dasharray="46 6"/>
+  <path d="M640 520 H676 M640 600 H676 M924 520 H960 M924 600 H960 M640 450 H676 M924 450 H960" stroke="#4a4058" stroke-width="4"/>
+  <path d="M772 222 L828 222 L840 262 L760 262Z" fill="#9a90aa" stroke="#4a4058" stroke-width="3"/>
+  <rect x="740" y="208" width="120" height="16" rx="4" fill="#7a6e8a"/>
+  <svg x="752" y="136" width="96" height="96" viewBox="0 0 120 120">${pumpkinSVG('happy').replace(/^<svg[^>]*>/, '').replace(/<\/svg>$/, '')}</svg>
+  <rect x="610" y="694" width="380" height="16" rx="4" fill="#6a6078"/>
+  ${torch(588)}${torch(1012)}
+  <!-- 吊灯 -->
+  <line x1="800" y1="48" x2="800" y2="112" stroke="#2a1f1a" stroke-width="5"/>
+  <ellipse cx="800" cy="400" rx="200" ry="160" fill="url(#rbWarm)" opacity=".4"/>
+  <ellipse cx="800" cy="130" rx="118" ry="18" fill="none" stroke="#2a1f1a" stroke-width="8"/>
+  <path d="M800 112 L700 130 M800 112 L900 130 M800 112 L760 140 M800 112 L840 140" stroke="#2a1f1a" stroke-width="4"/>
+  ${chCandle(690, 130)}${chCandle(745, 145)}${chCandle(800, 150)}${chCandle(855, 145)}${chCandle(910, 130)}
+  <!-- 右侧：楼梯与符号面板 -->
+  <g>${Array.from({ length: 9 }, (_, i) => { const x = 1170 + i * 48, y = 700 - (i + 1) * 36; return `<rect x="${x}" y="${y}" width="${1600 - x}" height="36" fill="${i % 2 ? '#5a3420' : '#6a3e26'}"/><rect x="${x}" y="${y}" width="${1600 - x}" height="6" fill="#8a5a32"/>`; }).join('')}
+    <line x1="1178" y1="600" x2="1600" y2="300" stroke="#6a3a20" stroke-width="10"/>
+    ${Array.from({ length: 9 }, (_, i) => { const x = 1190 + i * 48, yb = 700 - (i + 1) * 36, yt = 600 - (i + .3) * 34; return `<line x1="${x}" y1="${yb}" x2="${x}" y2="${yt}" stroke="#4a2a16" stroke-width="5"/>`; }).join('')}
+    <rect x="1168" y="590" width="20" height="110" fill="#4a2a16"/><circle cx="1178" cy="586" r="13" fill="#6a3e22"/>
+  </g>
+  <g transform="translate(1330,110)">
+    <rect width="240" height="170" rx="10" fill="#5c5466" stroke="#3a3044" stroke-width="5"/>
+    ${[['#3a2a56', `<polygon points="30,62 10,98 50,98" fill="none" stroke="#c08aff" stroke-width="6"/>`], ['#2a4a2a', `<path d="M92 60 A20 20 0 1 0 92 100 A15 15 0 1 1 92 60Z" fill="#7ae07a"/>`], ['#4a3a1a', `<polygon points="${starPts(140, 82, 20, 8)}" fill="#ffc040"/>`], ['#3a1a1a', `<circle cx="198" cy="80" r="17" fill="none" stroke="#ff5050" stroke-width="6"/>`]].map(([bg, ic], i) => `<rect x="${10 + i * 56}" y="44" width="52" height="74" rx="5" fill="${bg}"/>${ic}`).join('')}
+    <rect x="30" y="134" width="12" height="18" rx="2" fill="#2a2430"/><rect x="88" y="134" width="12" height="18" rx="2" fill="#2a2430"/><rect x="146" y="134" width="12" height="18" rx="2" fill="#2a2430"/><rect x="204" y="134" width="12" height="18" rx="2" fill="#2a2430"/>
+  </g>
+  <!-- 地板 -->
+  <rect y="700" width="1600" height="200" fill="url(#rbFloor)"/>
+  <g stroke="#1a0f18" stroke-width="3" opacity=".55">${floorLines.join('')}</g>
+  <rect y="690" width="1600" height="12" fill="#2a1810"/>
+  <!-- 地毯 -->
+  <ellipse cx="800" cy="790" rx="330" ry="72" fill="url(#rbRug)" stroke="#8a3a5a" stroke-width="8"/>
+  <ellipse cx="800" cy="790" rx="280" ry="56" fill="none" stroke="#c0506a" stroke-width="4" stroke-dasharray="10 8"/>
+  <path d="M800 744 L812 780 L880 790 L812 800 L800 836 L788 800 L720 790 L788 780Z" fill="#ffd45c" opacity=".55"/>
+  <path d="M960 786 A20 20 0 1 0 960 806 A15 15 0 1 1 960 786Z" fill="#ffd45c" opacity=".45"/><polygon points="${starPts(640, 794, 14, 6)}" fill="#ffd45c" opacity=".45"/>
+  <!-- 门边小南瓜 -->
+  <svg x="980" y="640" width="70" height="70" viewBox="0 0 120 120">${pumpkinSVG('glow').replace(/^<svg[^>]*>/, '').replace(/<\/svg>$/, '')}</svg>
+  <!-- 右前方宝箱 -->
+  <g transform="translate(1330,700)">
+    <rect x="0" y="40" width="300" height="170" rx="8" fill="#6a3a1c"/><path d="M0 50 Q150 -20 300 50 L300 64 L0 64Z" fill="#7a4626"/>
+    <rect x="0" y="60" width="300" height="12" fill="#3a3044"/><rect x="34" y="40" width="14" height="170" fill="#3a3044"/><rect x="250" y="40" width="14" height="170" fill="#3a3044"/>
+    ${['🧙', '🎃', '🦇', '👻'].map((e, i) => `<rect x="${58 + i * 46}" y="96" width="40" height="52" rx="5" fill="#d9b45a" stroke="#8a6a20" stroke-width="2"/><text x="${78 + i * 46}" y="131" font-size="26" text-anchor="middle">${e}</text>`).join('')}
+  </g>
+  <!-- 前景桌子 -->
+  <g>
+    <path d="M-10 726 L430 712 L470 806 L-10 822Z" fill="#6a3e22"/><path d="M-10 822 L470 806 L470 830 L-10 848Z" fill="#4a2a14"/>
+    <rect x="20" y="840" width="26" height="70" fill="#3a2010"/><rect x="420" y="826" width="26" height="80" fill="#3a2010"/>
+    <path d="M120 742 L330 732 L360 790 L136 800Z" fill="#ead6a8"/><path d="M160 752 L230 750 L236 774 L166 777Z M246 748 L310 745 L320 770 L252 772Z" fill="none" stroke="#7a5030" stroke-width="3"/>
+    <path d="M262 778 L276 790 M276 778 L262 790" stroke="#c0281e" stroke-width="5"/>
+    <rect x="30" y="702" width="80" height="24" rx="3" fill="#5a1d2a" transform="rotate(-4 70 714)"/><rect x="36" y="684" width="70" height="20" rx="3" fill="#2a3a6a" transform="rotate(3 70 694)"/>
+    <ellipse cx="400" cy="752" rx="24" ry="9" fill="none" stroke="#c8962e" stroke-width="5"/><line x1="420" y1="758" x2="446" y2="776" stroke="#5a3a1a" stroke-width="7"/>
+  </g>
+  <rect width="1600" height="900" fill="url(#rbVig)"/>
+  </svg>`;
+}
+
+/* ============================================================
+   8. 界面辅助：提示、横幅、浮动积分、弹窗、转场
+   ============================================================ */
+let toastTimer;
+function toast(msg, ms = 2600){ const t = $('#toast'); t.textContent = msg; t.classList.add('show'); clearTimeout(toastTimer); toastTimer = setTimeout(() => t.classList.remove('show'), ms); }
+async function banner(title, sub = '', ms = 2200){ const b = $('#banner'); b.innerHTML = `<h3>${title}</h3>${sub ? `<p>${sub}</p>` : ''}`; b.classList.add('show'); await wait(ms); b.classList.remove('show'); await wait(400); }
+function floatText(text, x, y){ const d = document.createElement('div'); d.className = 'float-pts'; d.textContent = text; d.style.left = x + 'px'; d.style.top = y + 'px'; document.body.appendChild(d); setTimeout(() => d.remove(), 1500); }
+function floatAt(el, text){ const r = el.getBoundingClientRect(); floatText(text, r.left + r.width / 2, r.top + r.height / 3); }
+function openModal(id){ $('#' + id).classList.remove('hidden'); }
+function closeModal(id){ $('#' + id).classList.add('hidden'); }
+function isOpen(id){ return !$('#' + id).classList.contains('hidden'); }
+function shakeEl(el){ el.classList.remove('shake'); void el.offsetWidth; el.classList.add('shake'); }
+
+function renderSlots(skipId){
+  $('#pwSlots').innerHTML = VOCAB_TASKS.map(t => { const got = S.solved[t.id] && t.id !== skipId; return `<div class="pw-slot ${got ? 'got' : ''}" data-id="${t.id}" title="任务${t.order}"><small>${t.emoji}</small><b>${got ? t.digit : '?'}</b></div>`; }).join('');
+}
+let shownScore = null;
+function updateTopbar(skipId){
+  const sc = score(), el = $('#tbScore');
+  if (shownScore !== null && sc !== shownScore){ el.classList.remove('bump'); void el.offsetWidth; el.classList.add('bump'); }
+  shownScore = sc; el.textContent = sc;
+  $('#tbClues').textContent = solvedCount();
+  $('#tbStage').textContent = { room:'第一关 · 魔法屋', hall:'第二关 · 知识大厅', garden:'第三关 · 南瓜花园', end:'🎉 已逃脱' }[S.stage] || '';
+  renderSlots(skipId);
+  $('#muteBtn').textContent = S.muted ? '🔇' : '🔊';
+}
+function flyDigit(fromEl, task){
+  return new Promise(res => {
+    const slot = $(`.pw-slot[data-id="${task.id}"]`);
+    if (!fromEl || !slot){ res(); return; }
+    const a = fromEl.getBoundingClientRect(), b = slot.getBoundingClientRect();
+    const d = document.createElement('div'); d.className = 'fly-digit'; d.textContent = task.digit;
+    d.style.left = (a.left + a.width / 2 - 30) + 'px'; d.style.top = (a.top + a.height / 2 - 35) + 'px';
+    document.body.appendChild(d);
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      const dx = (b.left + b.width / 2) - (a.left + a.width / 2), dy = (b.top + b.height / 2) - (a.top + a.height / 2);
+      d.style.transform = `translate(${dx}px,${dy}px) scale(.55) rotate(360deg)`;
+    }));
+    setTimeout(() => {
+      d.remove(); updateTopbar();
+      const s2 = $(`.pw-slot[data-id="${task.id}"]`); if (s2){ s2.classList.add('pop'); FX.burstAt(s2, { count:24, speed:4, size:4 }); }
+      Sound.play('collect'); res();
+    }, 1050);
+  });
+}
+
+async function goto(stage, instant = false){
+  if (!canEnter(stage)){ toast('还不能进入这一关哦！先完成前面的挑战吧～'); Sound.play('wrong'); return false; }
+  if (!instant){ Sound.play('whoosh'); $('#warp').classList.add('on'); await wait(480); }
+  S.stage = stage; save();
+  showStage(stage);
+  if (!instant){ await wait(80); $('#warp').classList.remove('on'); FX.burst(innerWidth / 2, innerHeight / 2, { count:60, speed:9, gravity:.02, life:50 }); }
+  return true;
+}
+function showStage(stage){
+  $$('.scene').forEach(s => s.classList.remove('active'));
+  $('#sc-' + stage).classList.add('active');
+  ['taskModal', 'doorModal', 'rewardModal', 'cardModal', 'confirmModal'].forEach(closeModal);
+  $('#topbar').classList.toggle('hidden', stage === 'start');
+  if (stage === 'start'){ renderStart(); FX.setAmbient('stars'); }
+  if (stage === 'room'){ renderRoom(); FX.setAmbient('dust'); }
+  if (stage === 'hall'){ renderHall(); FX.setAmbient('sparkle'); }
+  if (stage === 'garden'){ renderGarden(); FX.setAmbient('firefly'); }
+  if (stage === 'end'){ renderEnd(); FX.setAmbient('stars'); }
+  updateTopbar();
+  measureTop();
+}
+function measureTop(){
+  const tb = $('#topbar');
+  const h = tb.classList.contains('hidden') ? 0 : tb.getBoundingClientRect().height;
+  document.documentElement.style.setProperty('--top', h + 'px');
+}
+addEventListener('resize', measureTop);
+
+function makeStars(el, n){ el.innerHTML = Array.from({ length:n }, () => `<i style="left:${Math.random() * 100}%;top:${Math.random() * 70}%;animation-delay:${(Math.random() * 3).toFixed(2)}s;transform:scale(${(.5 + Math.random()).toFixed(2)})"></i>`).join(''); }
+
+/* ============================================================
+   9. 开始界面
+   ============================================================ */
+function renderStart(){
+  if (!$('#castleHolder').innerHTML){
+    makeStars($('#startStars'), 70);
+    $('#castleHolder').innerHTML = castleSVG();
+    $('#startFlyers').innerHTML = `<div class="flyer bat1">${batSVG()}</div><div class="flyer bat2">${batSVG()}</div><div class="flyer bat3">${batSVG()}</div><div class="flyer gh1">${ghostSVG()}</div><div class="flyer gh2">${ghostSVG()}</div>`;
+    $('#storyGhost').innerHTML = ghostSVG();
+  }
+  $('#startMain').classList.remove('hidden'); $('#storyPanel').classList.add('hidden');
+}
+$('#enterBtn').addEventListener('click', () => {
+  Sound.play('door'); $('#startMain').classList.add('hidden'); $('#storyPanel').classList.remove('hidden');
+  FX.burst(innerWidth / 2, innerHeight / 2, { count:50, speed:8 });
+});
+$('#adventureBtn').addEventListener('click', () => goto('room'));
+
+/* ============================================================
+   10. 第一关：魔法屋与六个任务
+   ============================================================ */
+const ART = { pumpkin:() => pumpkinSVG('happy'), witch:() => witchSVG(false), broom:broomSVG, candle:() => candleSVG(!!S.solved.candle), bat:batSVG, ghost:ghostSVG };
+const TASK_ART = { pumpkin:() => pumpkinSVG('happy'), witch:() => witchSVG(true), broom:broomSVG, candle:() => candleSVG(false), bat:batSVG, ghost:ghostSVG };
+
+function renderRoom(){
+  const room = $('#room');
+  if (!room.dataset.built){
+    room.innerHTML = roomBgSVG()
+      + `<button class="room-door" id="roomDoor" aria-label="魔法门"><div class="rd-frame"><div class="rd-light"></div><div class="rd-leaf">${doorLeafSVG()}</div></div><span class="tag">✨ 点击魔法门输入密码</span></button>`
+      + VOCAB_TASKS.map(t => { const p = ROOM_POS[t.id]; return `<button class="obj obj-${t.id}" data-id="${t.id}" style="left:${p[0]}%;top:${p[1]}%;width:${p[2]}%" aria-label="任务${t.order}"><div class="art"></div><span class="mark">!</span><span class="tag"></span></button>`; }).join('');
+    room.dataset.built = '1';
+    room.addEventListener('click', e => {
+      const o = e.target.closest('.obj'); if (o){ openTask(o.dataset.id); return; }
+      if (e.target.closest('#roomDoor')) openDoor();
+    });
+  }
+  VOCAB_TASKS.forEach(t => {
+    const el = room.querySelector(`.obj[data-id="${t.id}"]`), done = !!S.solved[t.id];
+    el.classList.toggle('solved', done);
+    const art = el.querySelector('.art');
+    if (!art.innerHTML || t.id === 'candle') art.innerHTML = ART[t.id]();
+    el.querySelector('.mark').textContent = done ? '✓' : '!';
+    el.querySelector('.tag').innerHTML = done ? `${t.word}<small class="py">${t.pinyin}</small>` : `${t.emoji} 任务${t.order}`;
+  });
+  const door = $('#roomDoor');
+  door.classList.toggle('ready', allSolved() && !S.doorOpen);
+  door.classList.toggle('open', S.doorOpen);
+  door.querySelector('.tag').textContent = S.doorOpen ? '✨ 进入第二关' : '✨ 点击魔法门输入密码';
+  if (S.doorOpen) door.querySelector('.tag').style.display = 'block';
+  $('#dock').innerHTML = VOCAB_TASKS.map(t => `<button class="chip ${S.solved[t.id] ? 'done' : ''}" data-id="${t.id}"><span class="e">${t.emoji}</span>${S.solved[t.id] ? `${t.word} ✓` : `任务${t.order} · ${t.kind}`}</button>`).join('')
+    + (allSolved() ? `<button class="chip door-chip" data-door="1"><span class="e">🚪</span>${S.doorOpen ? '进入第二关' : '打开魔法门'}</button>` : '');
+  $('#roomTip').textContent = allSolved() ? (S.doorOpen ? '魔法门已经打开，点击门进入第二关！' : '六个秘密数字都找到了！点击中间发光的魔法门输入密码。') : `点击房间里闪着「!」的物品，完成六个中文挑战（已完成 ${solvedCount()}/6）`;
+}
+$('#dock').addEventListener('click', e => { const c = e.target.closest('.chip'); if (!c) return; if (c.dataset.door) openDoor(); else openTask(c.dataset.id); });
+
+let curTask = null, justSolved = null, tries = 0;
+function openTask(id){
+  const t = VOCAB_TASKS.find(x => x.id === id); if (!t) return;
+  Sound.play('click');
+  curTask = t; justSolved = null; tries = 0;
+  $('#taskBox').classList.remove('shake');
+  $('#tmArt').className = 'tm-art';
+  $('#tmArt').innerHTML = `${t.id === 'bat' ? '<div class="art-moon"></div>' : ''}<div class="glow-ring"></div><div class="art-inner">${TASK_ART[t.id]()}</div><div class="art-label">${t.emoji} 任务 ${t.order}</div>`;
+  $('#tmHead').innerHTML = `<span class="badge">任务 ${t.order} / 6</span><span class="badge alt">${t.kind}</span>${S.solved[t.id] ? '<span class="badge" style="background:rgba(95,224,160,.18);border-color:rgba(95,224,160,.6);color:#bff5d8">已完成</span>' : ''}`;
+  $('#tmTitle').textContent = `${t.emoji} ${t.kind}`;
+  $('#tmFb').textContent = ''; $('#tmFb').className = 'feedback'; $('#tmHint').innerHTML = '';
+  if (S.solved[t.id]){
+    $('#tmPrompt').innerHTML = '你已经完成了这个任务，复习一下这个词吧！（同一个任务不能重复得分）';
+    $('#tmPlay').innerHTML = successHTML(t, false);
+  } else {
+    $('#tmPrompt').innerHTML = t.prompt + (t.type === 'arrange' && t.mode === 'hanzi' ? ` <button class="speak" data-say="${t.word}" title="听发音">🔊</button>` : '')
+      + (t.mode === 'pinyin' ? ` <button class="speak" data-say="${t.word}" title="听发音">🔊</button>` : '');
+    if (t.type === 'arrange') startArrange(t); else startChoice(t);
+  }
+  openModal('taskModal');
+}
+function successHTML(t, fresh){
+  return `<div class="success">
+    ${fresh ? '<div class="great">太棒了！🎉</div>' : ''}
+    <div class="vocab"><div><div class="vw">${t.word}</div><div class="vp py">${t.pinyin}</div><div class="ve">${t.english}</div></div><button class="speak" data-say="${t.word}" title="听发音">🔊</button></div>
+    ${t.id === 'broom' ? `<div class="vocab" style="padding:12px 18px"><div><div style="font-size:24px;font-weight:700">女巫骑着扫把。</div><div class="vp py" style="font-size:16px">Nǚwū qízhe sàoba.</div></div><button class="speak" data-say="女巫骑着扫把。">🔊</button></div>` : ''}
+    ${t.id === 'ghost' ? `<div class="vocab" style="padding:12px 18px"><div><div style="font-size:20px;font-weight:700">万圣节的晚上，我看见了一个幽灵。</div></div><button class="speak" data-say="万圣节的晚上，我看见了一个幽灵。">🔊</button></div>` : ''}
+    <div class="digit-get"><div class="digit-big" id="digitBig">${t.digit}</div><div>${fresh ? `获得第 <b style="color:var(--gold)">${t.order}</b> 个秘密数字！<br><span style="color:var(--ink-dim);font-size:14px">数字正在飞进顶部的密码槽…… ⭐ +${SCORE_RULES.task} 分</span>` : `第 ${t.order} 个秘密数字`}</div></div>
+    <div><button class="btn small" data-close="taskModal">继续探索 →</button></div>
+  </div>`;
+}
+const WRONG_MSG = ['再试一次！', '差一点就成功了！', '加油，你可以的！'];
+function wrongFeedback(t){
+  tries++;
+  Sound.play('wrong');
+  $('#tmFb').textContent = WRONG_MSG[(tries - 1) % WRONG_MSG.length]; $('#tmFb').className = 'feedback bad';
+  const h = t.hints[Math.min(tries - 1, t.hints.length - 1)];
+  $('#tmHint').innerHTML = `<div class="hint">💡 ${h}</div>`;
+}
+async function taskSuccess(t){
+  if (S.solved[t.id]) return;
+  S.solved[t.id] = true; save();
+  justSolved = t.id;
+  Sound.play('correct');
+  $('#tmFb').textContent = ''; $('#tmHint').innerHTML = '';
+  const art = $('#tmArt'); art.classList.add('celebrate', 'c-' + t.id);
+  if (t.id === 'candle') art.querySelector('.art-inner').innerHTML = candleSVG(true);
+  FX.burstAt(art.querySelector('.art-inner'), { count:50, speed:7 });
+  $('#tmHead').insertAdjacentHTML('beforeend', '<span class="badge" style="background:rgba(95,224,160,.18);border-color:rgba(95,224,160,.6);color:#bff5d8">已完成</span>');
+  $('#tmPlay').innerHTML = successHTML(t, true);
+  $('#tmPrompt').innerHTML = '';
+  updateTopbar(t.id);
+  floatAt($('#digitBig'), `+${SCORE_RULES.task}`);
+  speakSoon(t.word);
+  await wait(700);
+  await flyDigit($('#digitBig'), t);
+}
+function speakSoon(w){ setTimeout(() => { if (isOpen('taskModal') && 'speechSynthesis' in window){ try { speak(w); } catch(e){} } }, 400); }
+
+// ---- 拖拽排列引擎（支持鼠标、触屏和点击） ----
+let A = null;
+function startArrange(t){
+  const tiles = t.tiles.map((x, i) => ({ tid:i, text:x.text, py:x.py }));
+  let order;
+  do { order = shuffle(tiles.map(x => x.tid)); } while (order.map(i => tiles[i].text).join('|') === t.answer.join('|') && tiles.length > 1);
+  A = { t, tiles, pool:order, slots:Array(t.groups.reduce((a, b) => a + b, 0)).fill(null), locked:false };
+  renderArrange();
+}
+function tileHTML(tile){ return `<div class="tile" data-tid="${tile.tid}" tabindex="0" role="button" aria-label="${esc(tile.text)}">${esc(tile.text)}${tile.py ? `<small class="py">${tile.py}</small>` : ''}</div>`; }
+function renderArrange(){
+  const t = A.t; let si = 0;
+  const groups = t.groups.map((n, g) => {
+    let h = `<div class="slot-group"><div class="slots">`;
+    for (let k = 0; k < n; k++, si++){ const tid = A.slots[si]; h += `<div class="slot" data-idx="${si}">${tid != null ? tileHTML(A.tiles[tid]) : ''}</div>`; }
+    return h + `</div>${t.groupLabels ? `<div class="slot-label">第${g + 1}个音节 · ${t.groupLabels[g]}</div>` : ''}</div>`;
+  }).join('');
+  $('#tmPlay').innerHTML = `<div class="arrange ${t.mode} ${A.locked ? 'locked' : ''}" id="arrangeBox">
+    <div class="slot-row">${groups}${t.suffix ? `<span class="suffix">${t.suffix}</span>` : ''}</div>
+    <div class="pool" data-pool="1">${A.pool.map(tid => tileHTML(A.tiles[tid])).join('')}</div>
+    <div class="arr-tools"><button class="btn small purple" data-act="reset">↺ 重新排列</button><span style="font-size:13px;color:var(--ink-faint)">拖动卡片，或点击卡片自动放入；点击格子里的卡片可以拿回来</span></div></div>`;
+}
+function removeTile(tid){
+  const pi = A.pool.indexOf(tid); if (pi >= 0){ A.pool.splice(pi, 1); return { from:'pool' }; }
+  const si = A.slots.indexOf(tid); if (si >= 0){ A.slots[si] = null; return { from:'slot', idx:si }; }
+  return { from:null };
+}
+function placeTile(tid, slotIdx){
+  const src = removeTile(tid);
+  const occ = A.slots[slotIdx];
+  if (occ != null && occ !== tid){ if (src.from === 'slot') A.slots[src.idx] = occ; else A.pool.push(occ); }
+  A.slots[slotIdx] = tid;
+  Sound.play('tick');
+  afterMove();
+}
+function returnTile(tid){ removeTile(tid); A.pool.push(tid); Sound.play('tick'); afterMove(); }
+function tapTile(tid){
+  if (A.slots.includes(tid)) return returnTile(tid);
+  const empty = A.slots.indexOf(null); if (empty >= 0) placeTile(tid, empty);
+}
+function afterMove(){
+  renderArrange();
+  if (A.slots.every(x => x != null)){ A.locked = true; $('#arrangeBox').classList.add('locked'); setTimeout(checkArrange, 280); }
+}
+function checkArrange(){
+  const t = A.t, got = A.slots.map(tid => A.tiles[tid].text);
+  const ok = got.join('|') === t.answer.join('|');
+  $$('#arrangeBox .slots').forEach(s => s.classList.add(ok ? 'right' : 'wrong'));
+  if (ok){ setTimeout(() => taskSuccess(t), 450); return; }
+  wrongFeedback(t);
+  setTimeout(() => {
+    if (!A || A.t !== t) return;
+    A.pool = shuffle(A.tiles.map(x => x.tid)); A.slots = A.slots.map(() => null); A.locked = false; renderArrange();
+  }, 1100);
+}
+// 指针拖拽（统一处理鼠标与触摸）
+$('#tmPlay').addEventListener('pointerdown', e => {
+  const tile = e.target.closest('.tile'); if (!tile || !A || A.locked) return;
+  e.preventDefault();
+  const tid = +tile.dataset.tid, sx = e.clientX, sy = e.clientY, rect = tile.getBoundingClientRect();
+  let ghost = null, over = null;
+  const move = ev => {
+    const dx = ev.clientX - sx, dy = ev.clientY - sy;
+    if (!ghost && Math.hypot(dx, dy) > 7){
+      ghost = tile.cloneNode(true); ghost.classList.add('drag-ghost');
+      Object.assign(ghost.style, { width:rect.width + 'px', height:rect.height + 'px', left:rect.left + 'px', top:rect.top + 'px' });
+      document.body.appendChild(ghost); tile.classList.add('dragging');
+    }
+    if (ghost){
+      ghost.style.left = (rect.left + dx) + 'px'; ghost.style.top = (rect.top + dy) + 'px';
+      const el = document.elementFromPoint(ev.clientX, ev.clientY), slot = el && el.closest('.slot');
+      if (over && over !== slot) over.classList.remove('over');
+      if (slot){ slot.classList.add('over'); over = slot; }
+    }
+  };
+  const up = ev => {
+    removeEventListener('pointermove', move); removeEventListener('pointerup', up); removeEventListener('pointercancel', up);
+    if (over) over.classList.remove('over');
+    if (ghost){
+      ghost.remove(); tile.classList.remove('dragging');
+      if (ev.type === 'pointercancel') return renderArrange();
+      const el = document.elementFromPoint(ev.clientX, ev.clientY);
+      const slot = el && el.closest('.slot'), pool = el && el.closest('.pool');
+      if (slot) placeTile(tid, +slot.dataset.idx);
+      else if (pool) returnTile(tid);
+      else renderArrange();
+    } else if (ev.type !== 'pointercancel') tapTile(tid);
+  };
+  addEventListener('pointermove', move); addEventListener('pointerup', up); addEventListener('pointercancel', up);
+});
+$('#tmPlay').addEventListener('keydown', e => { const tile = e.target.closest('.tile'); if (tile && A && !A.locked && (e.key === 'Enter' || e.key === ' ')){ e.preventDefault(); tapTile(+tile.dataset.tid); } });
+
+// ---- 选择题引擎 ----
+function startChoice(t){
+  const order = shuffle(t.options.map((_, i) => i));
+  let q = '';
+  if (t.bigText) q = `<div class="q-big">${t.bigText}</div>`;
+  else if (t.sentence) q = `<div class="q-sentence">${t.sentence.replace('______', '<span class="blank" id="blank">？</span>')} <button class="speak" data-say="${t.sentence.replace('______', '什么')}" title="听句子" style="vertical-align:middle">🔊</button></div>`;
+  else q = `<div class="q-sentence" style="text-align:center;font-size:28px">${t.question}</div>`;
+  $('#tmPlay').innerHTML = `${q}<div class="options" id="choiceBox" style="margin-top:14px">${order.map((k, pos) => { const o = t.options[k]; return `<button class="opt" data-v="${esc(o.text)}"><span class="letter">${LETTERS[pos]}</span><span><span class="${t.bigText ? 'py' : ''}">${esc(o.text)}</span>${t.showPinyin && o.py ? `<small class="py">${o.py}</small>` : ''}</span></button>`; }).join('')}</div>`;
+}
+$('#tmPlay').addEventListener('click', e => {
+  const act = e.target.closest('[data-act="reset"]');
+  if (act && A && !A.locked){ A.pool = shuffle(A.tiles.map(x => x.tid)); A.slots = A.slots.map(() => null); Sound.play('click'); renderArrange(); return; }
+  const opt = e.target.closest('.opt'); if (!opt || opt.disabled || !curTask || curTask.type !== 'choice' || S.solved[curTask.id]) return;
+  const t = curTask;
+  if (opt.dataset.v === t.answer){
+    $$('#choiceBox .opt').forEach(b => b.disabled = true);
+    opt.classList.add('right');
+    const bl = $('#blank'); if (bl) bl.textContent = t.answer;
+    setTimeout(() => taskSuccess(t), 650);
+  } else {
+    opt.classList.add('wrong'); opt.disabled = true; shakeEl(opt);
+    wrongFeedback(t);
+  }
+});
+
+function closeTask(){
+  closeModal('taskModal');
+  try { speechSynthesis.cancel(); } catch(e){}
+  const id = justSolved; justSolved = null; curTask = null; A = null;
+  renderRoom();
+  if (id) roomCelebrate(id);
+}
+async function roomCelebrate(id){
+  const el = $(`.obj[data-id="${id}"]`); if (!el) return;
+  FX.burstAt(el, { count:40, speed:6 });
+  if (id === 'broom'){
+    el.classList.add('away');
+    const f = document.createElement('div'); f.className = 'broom-flyer'; f.innerHTML = broomSVG(); $('#room').appendChild(f);
+    Sound.play('whoosh'); setTimeout(() => { f.remove(); el.classList.remove('away'); }, 3250);
+  }
+  if (id === 'ghost'){ el.classList.add('spin-once'); setTimeout(() => el.classList.remove('spin-once'), 1500); }
+  if (id === 'bat') Sound.play('whoosh');
+  if (allSolved() && !S.doorOpen){
+    await wait(id === 'broom' ? 3300 : 1200);
+    Sound.play('fanfare'); FX.confetti(80);
+    renderRoom();
+    await banner('恭喜！你已经找到了六个秘密数字！', '魔法门开始发光了……快去输入密码吧！', 2600);
+    openDoor();
+  }
+}
+
+// ---- 魔法门 ----
+let codeEntry = '';
+$('#doorLeaf').innerHTML = doorLeafSVG();
+$('#keypad').innerHTML = [1, 2, 3, 4, 5, 6, 7, 8, 9].map(n => `<button data-k="${n}">${n}</button>`).join('') + `<button class="del" data-k="del">⌫ 删除</button><button data-k="0">0</button><button class="ok" data-k="ok">🔓 解锁</button>`;
+function openDoor(){
+  if (S.doorOpen){ goto('hall'); return; }
+  if (!allSolved()){ Sound.play('wrong'); toast(`魔法门被锁住了！还需要 ${6 - solvedCount()} 个秘密数字`); shakeEl($('#roomDoor')); return; }
+  Sound.play('click');
+  codeEntry = ''; renderCode();
+  $('#doorStage').classList.remove('open'); $('#doorStage').classList.add('glow');
+  $('#doorInput').classList.remove('hidden'); $('#doorNext').classList.add('hidden');
+  $('#doorFb').textContent = ''; $('#doorFb').className = 'feedback';
+  openModal('doorModal');
+}
+function renderCode(){ $('#codeRow').innerHTML = VOCAB_TASKS.map((t, i) => `<div class="code-box ${i === codeEntry.length ? 'cur' : ''}"><b>${codeEntry[i] ?? ''}</b><span>${t.emoji}</span></div>`).join(''); }
+function codeKey(k){
+  if (S.doorOpen || $('#doorInput').classList.contains('hidden')) return;
+  if (k === 'del') codeEntry = codeEntry.slice(0, -1);
+  else if (k === 'ok') return checkCode();
+  else if (codeEntry.length < 6){ codeEntry += k; Sound.play('tick'); }
+  $('#doorFb').textContent = ''; renderCode();
+}
+$('#keypad').addEventListener('click', e => { const b = e.target.closest('button'); if (b) codeKey(b.dataset.k); });
+async function checkCode(){
+  const fb = $('#doorFb');
+  if (codeEntry.length < 6){ fb.textContent = '请输入完整的六位密码。'; fb.className = 'feedback bad'; return; }
+  if (codeEntry !== PASSWORD()){
+    Sound.play('wrong'); shakeEl($('#doorStage'));
+    fb.textContent = '密码不正确，再试一次！（提示：按照任务 1→6 的顺序排列数字）'; fb.className = 'feedback bad';
+    codeEntry = ''; renderCode(); return;
+  }
+  S.doorOpen = true; save();
+  Sound.play('door');
+  $('#doorInput').classList.add('hidden'); fb.textContent = '';
+  $('#doorStage').classList.remove('glow'); $('#doorStage').classList.add('open');
+  for (let i = 0; i < 4; i++) setTimeout(() => FX.burstAt($('#doorStage'), { count:40, speed:7, colors:['#fff6c0', '#ffd45c', '#ffffff', '#c9a0ff'] }), 500 + i * 300);
+  renderRoom();
+  await wait(1400);
+  $('#doorNext').classList.remove('hidden');
+}
+$('#toHallBtn').addEventListener('click', () => { closeModal('doorModal'); goto('hall'); });
+
+/* ============================================================
+   11. 第二关：万圣节知识大挑战
+   ============================================================ */
+function renderHallDeco(){
+  if ($('#hallDeco').innerHTML) return;
+  const cards = ['A', 'B', 'C', 'D', '?', '文', '✦', '问'];
+  $('#hallDeco').innerHTML = `<div class="hall-arch"></div><div class="pillar l"></div><div class="pillar r"></div><div class="hall-floor"></div>`
+    + cards.map((c, i) => `<div class="fcard" style="left:${[6, 88, 14, 80, 4, 92, 20, 74][i]}%;top:${[18, 22, 62, 66, 42, 46, 8, 6][i]}%;animation-delay:${i * .7}s">${c}</div>`).join('');
+}
+function renderHall(){
+  renderHallDeco();
+  const q = S.quiz, m = $('#hallMain');
+  if (!q.started){
+    m.innerHTML = `<div class="book-cover"><div class="emblem">📖</div><h2>万圣节知识大挑战</h2>
+      <p>回答五道问题，获得魔法钥匙，<br>打开通往南瓜花园的大门！</p>
+      <div class="rules"><span>✅ 每题答对 +${SCORE_RULES.quiz} 分</span><span>🙂 答错不扣分</span><span>🔑 至少答对 ${SCORE_RULES.passCount} 题过关</span></div>
+      ${q.attempt > 1 ? `<p style="font-size:14px;color:var(--gold-2)">第 ${q.attempt} 次挑战 · 题目和选项顺序已重新打乱</p>` : ''}
+      <button class="btn huge" id="quizStart">✨ 开始挑战</button></div>`;
+    $('#quizStart').onclick = () => { S.quiz.started = true; save(); Sound.play('key'); renderHall(); };
+    return;
+  }
+  if (!q.done) return renderQuestion();
+  renderQuizResult();
+}
+function renderQuestion(){
+  const q = S.quiz, qi = q.order[q.idx], Q = QUIZ[qi], ans = q.answers[q.idx], optOrder = q.opts[q.idx];
+  const dots = q.order.map((_, i) => { const a = q.answers[i]; return `<i class="${a ? (a.correct ? 'ok' : 'no') : (i === q.idx ? 'cur' : '')}"></i>`; }).join('');
+  const correctK = Q.options.indexOf(Q.answer);
+  const opts = optOrder.map((k, pos) => {
+    let cls = '';
+    if (ans){ if (k === correctK) cls = 'right'; else if (k === ans.choice) cls = 'wrong'; }
+    return `<button class="opt ${cls}" data-k="${k}" ${ans ? 'disabled' : ''}><span class="letter">${LETTERS[pos]}</span><span>${esc(Q.options[k])}</span></button>`;
+  }).join('');
+  const correctPos = optOrder.indexOf(correctK);
+  const last = q.idx === q.order.length - 1;
+  $('#hallMain').innerHTML = `<div class="book">
+    <div class="page left"><div class="q-num">📖 第 ${q.idx + 1} / ${q.order.length} 题</div><div class="q-dots">${dots}</div>
+      <div class="q-text">${esc(Q.q)}</div>
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:10px"><div class="page-score">本关得分：<b>${quizCorrect() * SCORE_RULES.quiz}</b> 分</div><button class="speak" data-say="${esc(Q.q)}" title="朗读题目">🔊</button></div></div>
+    <div class="page right"><div class="options" id="quizOpts">${opts}</div>
+      ${ans ? `<div class="explain ${ans.correct ? 'good' : ''}">${ans.correct ? `✅ 答对了！<b>+${SCORE_RULES.quiz} 分</b><br>` : `❌ 再接再厉！正确答案是：<b>${LETTERS[correctPos]}. ${esc(Q.answer)}</b><br>`}${esc(Q.explain)}</div>
+      <div class="actions"><button class="btn small" id="quizNext">${last ? '📜 查看成绩' : '下一题 →'}</button></div>` : ''}
+    </div></div>`;
+  if (ans) $('#quizNext').onclick = () => { if (last){ S.quiz.done = true; S.quiz.passed = quizCorrect() >= SCORE_RULES.passCount; } else S.quiz.idx++; save(); Sound.play('click'); renderHall(); };
+}
+$('#hallMain').addEventListener('click', e => {
+  const b = e.target.closest('#quizOpts .opt'); if (!b || b.disabled) return;
+  const q = S.quiz; if (q.done || q.answers[q.idx]) return;
+  const Q = QUIZ[q.order[q.idx]], k = +b.dataset.k, correct = Q.options[k] === Q.answer;
+  q.answers[q.idx] = { choice:k, correct }; save();
+  if (correct){ Sound.play('correct'); floatAt(b, `+${SCORE_RULES.quiz}`); FX.burstAt(b, { count:30, speed:5 }); }
+  else { Sound.play('wrong'); }
+  updateTopbar(); renderQuestion();
+  if (!correct) shakeEl($('#quizOpts .opt.wrong') || b);
+});
+function renderQuizResult(){
+  const q = S.quiz, c = quizCorrect(), n = q.order.length;
+  const stars = '⭐'.repeat(c) + '☆'.repeat(n - c);
+  if (q.passed){
+    $('#hallMain').innerHTML = `<div class="book">
+      <div class="page left"><div class="q-num">📜 挑战成绩</div><div class="result-big">${c} / ${n}</div><div class="result-stars">${stars}</div>
+        <div style="text-align:center;font-size:18px">本关得分：<b style="color:#c0500a;font-size:26px">${c * SCORE_RULES.quiz}</b> 分</div></div>
+      <div class="page right" style="align-items:center;text-align:center;justify-content:center">
+        <div style="font-family:var(--title);font-size:28px;color:#8a3a10">太棒了！你已经通过万圣节知识考验！</div>
+        <div class="key-wrap">${keySVG()}</div>
+        <p style="color:#6a4a20">魔法书打开了，一把金色钥匙飞了出来！</p>
+        <button class="btn" id="toGarden">🔑 打开南瓜花园</button></div></div>`;
+    Sound.play('key'); setTimeout(() => { Sound.play('fanfare'); FX.burstAt($('.key-svg'), { count:60, speed:7 }); const k = $('.key-svg'); if (k) k.classList.add('idle'); }, 1300);
+    $('#toGarden').onclick = () => goto('garden');
+  } else {
+    $('#hallMain').innerHTML = `<div class="book">
+      <div class="page left"><div class="q-num">📜 挑战成绩</div><div class="result-big">${c} / ${n}</div><div class="result-stars">${stars}</div>
+        <div style="text-align:center;font-size:18px">本次得分：<b style="color:#c0500a;font-size:26px">${c * SCORE_RULES.quiz}</b> 分</div></div>
+      <div class="page right" style="align-items:center;text-align:center;justify-content:center;gap:18px">
+        <div style="font-family:var(--title);font-size:28px;color:#8a3a10">还差一点点！</div>
+        <p style="font-size:17px;line-height:1.8">至少需要答对 <b>${SCORE_RULES.passCount}</b> 题才能拿到魔法钥匙。<br>重新挑战时，题目和选项的顺序会重新打乱，<br>本关积分也会重新计算。</p>
+        <button class="btn" id="quizRetry">🔄 再挑战一次</button></div></div>`;
+    $('#quizRetry').onclick = () => { S.quiz = newQuiz(S.quiz.attempt + 1); S.quiz.started = true; save(); updateTopbar(); Sound.play('click'); renderHall(); toast('重新挑战！题目顺序已经打乱'); };
+  }
+}
+
+/* ============================================================
+   12. 第三关：神秘南瓜盲盒
+   ============================================================ */
+let picking = false;
+function renderGardenDeco(){
+  if ($('#gardenDeco').innerHTML) return;
+  makeStars($('#gardenStars'), 60);
+  const lan = `<svg viewBox="0 0 40 90"><line x1="20" y1="30" x2="20" y2="90" stroke="#3a2430" stroke-width="4"/><path d="M8 8 L32 8 L28 34 L12 34Z" fill="#ffcf5a" class="glowpulse"/><path d="M6 6 L34 6 L30 0 L10 0Z" fill="#2a1a30"/><circle cx="20" cy="20" r="18" fill="#ffd45c" opacity=".25"/></svg>`;
+  $('#gardenDeco').innerHTML = `<svg class="g-hills" viewBox="0 0 1200 400" preserveAspectRatio="none"><path d="M0 400 L0 160 Q200 80 420 150 Q640 210 860 120 Q1040 60 1200 140 L1200 400Z" fill="#1d1a5a"/><path d="M0 400 L0 250 Q300 180 600 240 Q900 300 1200 220 L1200 400Z" fill="#14123f"/>
+    ${Array.from({ length:14 }, (_, i) => `<rect x="${i * 90 + 10}" y="${300 - (i % 3) * 6}" width="8" height="60" fill="#2a2050"/>`).join('')}<path d="M0 316 Q600 300 1200 316" stroke="#2a2050" stroke-width="6" fill="none"/></svg>
+    <div class="g-cottage">${cottageSVG()}</div>
+    <div class="lantern" style="left:16%">${lan}</div><div class="lantern" style="right:18%;animation-delay:1s">${lan}</div><div class="lantern" style="right:4%;animation-delay:2s">${lan}</div>`;
+}
+function renderGarden(){
+  renderGardenDeco();
+  const picked = S.picked;
+  $('#gardenMain').innerHTML = `<div class="garden-head"><h2>🎃 神秘南瓜盲盒</h2><p>「每个南瓜都藏着一个秘密！你会获得什么？」</p><span class="rule">${picked == null ? '👉 只能选择一个南瓜哦！想好了再点～' : '✨ 你已经打开了一个南瓜'}</span></div>
+    <div class="pk-grid ${picked != null ? 'locked' : ''}" id="pkGrid">${PUMPKINS.map((p, i) => {
+      const r = picked === i ? REWARDS[S.rewardMap[i]] : null;
+      return `<button class="pk-btn ${picked === i ? 'picked opened' : ''}" data-i="${i}" style="--d:${(i * .23).toFixed(2)}s" ${picked != null ? 'disabled' : ''} aria-label="${p.name}"><div class="pk-art">${pumpkinSVG(p.style)}</div><span class="pk-reveal">${r ? r.icon : ''}</span><span class="pk-name">${p.name}</span></button>`; }).join('')}</div>
+    ${picked != null ? `<div class="garden-actions"><button class="btn" id="seeReward">🎁 查看我的奖励</button><button class="btn purple" id="toEnd">🏆 查看最终成绩</button></div>` : ''}`;
+  if (picked != null){ $('#seeReward').onclick = () => showReward(false); $('#toEnd').onclick = () => goto('end'); }
+}
+$('#gardenMain').addEventListener('click', async e => {
+  const b = e.target.closest('.pk-btn'); if (!b || b.disabled || picking || S.picked != null) return;
+  picking = true;
+  const i = +b.dataset.i;
+  S.picked = i; save();                       // 立即保存，刷新也不能重新选择
+  $('#pkGrid').classList.add('locked'); $$('.pk-btn').forEach(x => x.disabled = true);
+  b.classList.add('picked', 'shaking'); Sound.play('shake');
+  await wait(900);
+  b.classList.remove('shaking'); b.classList.add('spinning'); Sound.play('whoosh');
+  await wait(820);
+  b.classList.remove('spinning');
+  const r = REWARDS[S.rewardMap[i]];
+  b.querySelector('.pk-reveal').textContent = r.icon; b.classList.add('opened');
+  Sound.play('pop'); FX.burstAt(b, { count:70, speed:9, colors:['#ffd45c', '#fff', '#ff8c1a', '#c9a0ff'] });
+  await wait(700);
+  picking = false;
+  renderGarden();
+  showReward(true);
+});
+function showReward(fresh){
+  const r = pickedReward(); if (!r) return;
+  const p = PUMPKINS[S.picked];
+  const note = r.kind === 'points' ? `⭐ ${r.points} 积分已经加入总分！` : r.kind === 'prize' ? '🎁 请向老师领取你的奖品！' : r.kind === 'challenge' ? '🎤 现在就在全班面前完成挑战吧！' : '👑 你是今天的万圣节幸运之星！';
+  $('#rewardBox').innerHTML = `<div class="rw-burst"></div><div class="rw-icon">${r.icon}</div><h2>${r.text}</h2><div class="rw-from">来自：${p.name}</div><div class="rw-note">${note}</div>
+    <div class="actions"><button class="btn" id="rwEnd">🏆 查看最终成绩</button><button class="btn purple" id="rwAgain">🔄 再玩一次</button></div>`;
+  openModal('rewardModal');
+  $('#rwEnd').onclick = () => { closeModal('rewardModal'); goto('end'); };
+  $('#rwAgain').onclick = () => restartGame();
+  if (fresh){
+    updateTopbar();
+    if (r.points) floatAt($('#rewardBox .rw-icon'), `+${r.points}`);
+    FX.confetti(r.big ? 180 : 110);
+    if (r.big){ Sound.play('fanfare'); FX.fireworks(7); } else Sound.play('correct');
+  }
+}
+
+/* ============================================================
+   13. 结束界面与成绩卡
+   ============================================================ */
+function renderEnd(){
+  makeStars($('#endStars'), 60);
+  const r = pickedReward();
+  $('#endMain').innerHTML = `<div class="end-card glass">
+    <div class="trophy">🏆</div>
+    <h1>🎉 恭喜你逃出了万圣节魔法屋！</h1>
+    <div class="end-score"><span>🏆 最终得分：</span><b>${score()}</b><span>分</span></div>
+    <ul class="end-list">
+      <li>🎃 已完成：<b>${solvedCount()}</b> 个中文词汇挑战</li>
+      <li>📖 已完成：<b>${S.quiz.order.length}</b> 道万圣节知识题（答对 <b>${quizCorrect()}</b> 题）</li>
+      <li>🎁 获得奖励：<b>${r ? r.label : '—'}</b></li>
+    </ul>
+    <div class="vocab-chips">${VOCAB_TASKS.map(t => `<span class="vchip">${t.emoji} ${t.word} <span class="py">${t.pinyin}</span><button class="speak" data-say="${t.word}" title="听发音">🔊</button></span>`).join('')}</div>
+    <div class="hh">万圣节快乐！Happy Halloween！</div>
+    <label class="name-field">✍️ 写上你的名字（可选）<input id="playerName" maxlength="16" placeholder="例如：小明 / Alex" value="${esc(S.name || '')}"></label>
+    <div class="end-actions"><button class="btn purple" id="endAgain">🔄 再玩一次</button><button class="btn" id="saveCard">📸 保存我的成绩</button></div>
+  </div>`;
+  $('#playerName').addEventListener('input', e => { S.name = e.target.value.slice(0, 16); save(); });
+  $('#endAgain').onclick = () => restartGame();
+  $('#saveCard').onclick = saveScoreCard;
+  setTimeout(() => { FX.fireworks(6); FX.confetti(120); Sound.play('fanfare'); }, 400);
+}
+function roundRect(c, x, y, w, h, r){ c.beginPath(); c.moveTo(x + r, y); c.arcTo(x + w, y, x + w, y + h, r); c.arcTo(x + w, y + h, x, y + h, r); c.arcTo(x, y + h, x, y, r); c.arcTo(x, y, x + w, y, r); c.closePath(); }
+function drawPumpkin(c, cx, cy, r){
+  c.save(); c.translate(cx, cy);
+  const g = c.createRadialGradient(-r * .3, -r * .3, r * .1, 0, 0, r * 1.2); g.addColorStop(0, '#ffc25a'); g.addColorStop(.6, '#f7891f'); g.addColorStop(1, '#c4500e');
+  c.fillStyle = g;
+  [[-.45, .78], [.45, .78], [-.2, .85], [.2, .85], [0, .9]].forEach(([dx, s]) => { c.beginPath(); c.ellipse(dx * r, 0, r * .55, r * s, 0, 0, Math.PI * 2); c.fill(); });
+  c.fillStyle = '#4f7a2a'; c.fillRect(-r * .08, -r * 1.05, r * .16, r * .3);
+  c.fillStyle = '#ffe066';
+  c.beginPath(); c.moveTo(-r * .45, -r * .05); c.lineTo(-r * .27, -r * .38); c.lineTo(-r * .1, -r * .05); c.fill();
+  c.beginPath(); c.moveTo(r * .45, -r * .05); c.lineTo(r * .27, -r * .38); c.lineTo(r * .1, -r * .05); c.fill();
+  c.beginPath(); c.moveTo(-r * .55, r * .15); c.quadraticCurveTo(0, r * .75, r * .55, r * .15); c.quadraticCurveTo(0, r * .4, -r * .55, r * .15); c.fill();
+  c.restore();
+}
+function makeScoreCard(){
+  const W = 1080, H = 1440, cv = document.createElement('canvas'); cv.width = W; cv.height = H;
+  const c = cv.getContext('2d'), T = '"ZCOOL KuaiLe","PingFang SC","Microsoft YaHei",sans-serif', B = '"PingFang SC","Microsoft YaHei",sans-serif';
+  const bg = c.createLinearGradient(0, 0, 0, H); bg.addColorStop(0, '#0b1446'); bg.addColorStop(.45, '#3b1d6e'); bg.addColorStop(1, '#170a2c');
+  c.fillStyle = bg; c.fillRect(0, 0, W, H);
+  for (let i = 0; i < 120; i++){ c.globalAlpha = .3 + Math.random() * .7; c.fillStyle = '#fff'; c.beginPath(); c.arc(Math.random() * W, Math.random() * H * .6, Math.random() * 2.2 + .4, 0, Math.PI * 2); c.fill(); }
+  c.globalAlpha = 1;
+  const mg = c.createRadialGradient(860, 210, 10, 860, 210, 220); mg.addColorStop(0, 'rgba(255,245,200,.6)'); mg.addColorStop(1, 'rgba(255,245,200,0)'); c.fillStyle = mg; c.fillRect(600, 0, 480, 460);
+  c.fillStyle = '#fff6d0'; c.beginPath(); c.arc(860, 210, 95, 0, Math.PI * 2); c.fill();
+  c.fillStyle = '#1d1250'; c.beginPath(); c.moveTo(0, H); c.lineTo(0, H - 230); c.quadraticCurveTo(300, H - 330, 560, H - 240); c.quadraticCurveTo(820, H - 160, W, H - 260); c.lineTo(W, H); c.fill();
+  drawPumpkin(c, 160, H - 220, 90); drawPumpkin(c, 330, H - 170, 60); drawPumpkin(c, 900, H - 210, 80);
+  c.strokeStyle = '#ffd45c'; c.lineWidth = 6; roundRect(c, 40, 40, W - 80, H - 80, 40); c.stroke();
+  c.strokeStyle = 'rgba(255,212,92,.4)'; c.lineWidth = 2; roundRect(c, 58, 58, W - 116, H - 116, 30); c.stroke();
+  c.textAlign = 'center';
+  c.fillStyle = '#ffb347'; c.font = `88px ${T}`; c.fillText('🎃 万圣节魔法屋', W / 2, 220);
+  c.fillStyle = '#e6d6ff'; c.font = `36px ${B}`; c.fillText('六把钥匙大逃脱 · 成绩卡', W / 2, 285);
+  const name = (S.name || '').trim() || '勇敢的冒险者';
+  c.fillStyle = '#fff'; c.font = `bold 52px ${B}`; c.fillText(name, W / 2, 400);
+  c.fillStyle = 'rgba(0,0,0,.3)'; roundRect(c, 190, 440, 700, 260, 36); c.fill();
+  c.fillStyle = '#ffe9a3'; c.font = `40px ${B}`; c.fillText('🏆 最终得分', W / 2, 510);
+  c.fillStyle = '#ffd45c'; c.font = `150px ${T}`; c.fillText(String(score()), W / 2 - 40, 665);
+  c.fillStyle = '#fff'; c.font = `48px ${B}`; c.fillText('分', W / 2 + (String(score()).length * 42) + 20, 665);
+  const r = pickedReward();
+  const lines = [`🎃 已完成 ${solvedCount()} 个中文词汇挑战`, `📖 已完成 ${S.quiz.order.length} 道知识题（答对 ${quizCorrect()} 题）`, `🎁 获得奖励：${r ? r.label : '—'}`];
+  c.textAlign = 'left'; c.font = `38px ${B}`;
+  lines.forEach((l, i) => { c.fillStyle = 'rgba(255,255,255,.08)'; roundRect(c, 150, 750 + i * 96, 780, 76, 20); c.fill(); c.fillStyle = '#fff'; c.fillText(l, 180, 802 + i * 96, 730); });
+  c.textAlign = 'center';
+  c.fillStyle = '#ffd45c'; c.font = `30px ${B}`; c.fillText(VOCAB_TASKS.map(t => `${t.word} ${t.pinyin}`).join('  ·  '), W / 2, 1075, W - 160);
+  c.fillStyle = '#ffb347'; c.font = `58px ${T}`; c.fillText('万圣节快乐！Happy Halloween！', W / 2, 1160, W - 140);
+  const d = new Date(); c.fillStyle = 'rgba(255,255,255,.7)'; c.font = `28px ${B}`; c.fillText(`${d.getFullYear()}年${d.getMonth() + 1}月${d.getDate()}日`, W / 2, H - 80);
+  return cv;
+}
+let cardURL = '';
+function downloadCard(){
+  const a = document.createElement('a'); a.href = cardURL; a.download = `万圣节魔法屋成绩卡-${(S.name || '我').trim() || '我'}.png`;
+  document.body.appendChild(a); a.click(); a.remove();
+}
+function saveScoreCard(){
+  try {
+    Sound.play('key');
+    cardURL = makeScoreCard().toDataURL('image/png');
+    $('#cardImg').src = cardURL; openModal('cardModal');
+    try { downloadCard(); } catch(e){}
+  } catch(e){ toast('成绩卡生成失败，请截图保存 📸'); }
+}
+$('#cardDownload').addEventListener('click', downloadCard);
+
+/* ============================================================
+   14. 全局事件、重新开始、初始化
+   ============================================================ */
+function restartGame(){
+  const muted = S.muted;
+  S = newState(muted); save();
+  shownScore = null;
+  ['taskModal', 'doorModal', 'rewardModal', 'cardModal', 'confirmModal'].forEach(closeModal);
+  const room = $('#room'); room.innerHTML = ''; delete room.dataset.built;
+  $('#hallMain').innerHTML = ''; $('#gardenMain').innerHTML = '';
+  goto('start');
+}
+document.addEventListener('click', e => {
+  const close = e.target.closest('[data-close]');
+  if (close){ const id = close.dataset.close; if (id === 'taskModal') closeTask(); else closeModal(id); Sound.play('click'); return; }
+  const say = e.target.closest('[data-say]'); if (say){ e.stopPropagation(); speak(say.dataset.say); return; }
+  if (e.target.closest('.btn') || e.target.closest('.icon-btn')) Sound.play('click');
+});
+['taskModal', 'doorModal', 'cardModal', 'confirmModal'].forEach(id => $('#' + id).addEventListener('pointerdown', e => { if (e.target.id === id){ if (id === 'taskModal') closeTask(); else closeModal(id); } }));
+$('#muteBtn').addEventListener('click', () => { S.muted = !S.muted; save(); updateTopbar(); if (!S.muted) Sound.play('click'); toast(S.muted ? '音效已关闭 🔇' : '音效已打开 🔊'); });
+$('#restartBtn').addEventListener('click', () => openModal('confirmModal'));
+$('#confirmRestart').addEventListener('click', () => restartGame());
+addEventListener('keydown', e => {
+  if (e.key === 'Escape'){ if (isOpen('taskModal')) closeTask(); else ['doorModal', 'cardModal', 'confirmModal', 'rewardModal'].forEach(id => { if (isOpen(id) && id !== 'rewardModal') closeModal(id); }); return; }
+  if (isOpen('doorModal')){
+    if (/^[0-9]$/.test(e.key)) codeKey(e.key);
+    else if (e.key === 'Backspace') codeKey('del');
+    else if (e.key === 'Enter'){ e.preventDefault(); codeKey('ok'); }
+  }
+});
+new ResizeObserver(measureTop).observe($('#topbar'));
+
+// 启动：恢复进度
+showStage(S.stage);
+if (S.stage !== 'start') toast('已为你恢复上次的游戏进度 ✨');
+window.__hmh = { get state(){ return S; }, PASSWORD, score };
+</script>
+</body>
+</html>
